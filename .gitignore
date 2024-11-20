@@ -1,5 +1,6 @@
 # Default ignored files
 *.gradle
 *.gradle/*
+*.gradle*
 .DS_Store
 **/.DS_Store
