@@ -1,16 +1,15 @@
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class ParseMovement {
+public class ParseSnakeMovement {
 
     @Test
     void headMovedUp() {
         Board board = new Board();
-        Movement movement = new Movement(board);
+        SnakeMovement snakeMovement = new SnakeMovement(board);
         int[] startingRowCol = board.getRowColHead();
-        movement.moveHeadUp();
+        snakeMovement.moveHeadUp();
         int[] endingRowCol = board.getRowColHead();
         assertNotEquals('H', board.getCell(startingRowCol[0], startingRowCol[1]));
         assertEquals('H', board.getCell(endingRowCol[0], endingRowCol[1]));
@@ -19,9 +18,9 @@ public class ParseMovement {
     @Test
     void headMovedDown() {
         Board board = new Board();
-        Movement movement = new Movement(board);
+        SnakeMovement snakeMovement = new SnakeMovement(board);
         int[] startingRowCol = board.getRowColHead();
-        movement.moveHeadDown();
+        snakeMovement.moveHeadDown();
         int[] endingRowCol = board.getRowColHead();
         assertNotEquals('H', board.getCell(startingRowCol[0], startingRowCol[1]));
         assertEquals('H', board.getCell(endingRowCol[0], endingRowCol[1]));
@@ -30,9 +29,9 @@ public class ParseMovement {
     @Test
     void headMovedLeft() {
         Board board = new Board();
-        Movement movement = new Movement(board);
+        SnakeMovement snakeMovement = new SnakeMovement(board);
         int[] startingRowCol = board.getRowColHead();
-        movement.moveHeadLeft();
+        snakeMovement.moveHeadLeft();
         int[] endingRowCol = board.getRowColHead();
         assertNotEquals('H', board.getCell(startingRowCol[0], startingRowCol[1]));
         assertEquals('H', board.getCell(endingRowCol[0], endingRowCol[1]));
@@ -41,9 +40,9 @@ public class ParseMovement {
     @Test
     void headMovedRight() {
         Board board = new Board();
-        Movement movement = new Movement(board);
+        SnakeMovement snakeMovement = new SnakeMovement(board);
         int[] startingRowCol = board.getRowColHead();
-        movement.moveHeadRight();
+        snakeMovement.moveHeadRight();
         int[] endingRowCol = board.getRowColHead();
         assertNotEquals('H', board.getCell(startingRowCol[0], startingRowCol[1]));
         assertEquals('H', board.getCell(endingRowCol[0], endingRowCol[1]));

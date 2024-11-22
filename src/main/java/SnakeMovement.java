@@ -1,8 +1,8 @@
-public class Movement {
+public class SnakeMovement {
 
     private final Board board;
 
-    public Movement(Board board) {
+    public SnakeMovement(Board board) {
         this.board = board;
     }
 
