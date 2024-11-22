@@ -6,6 +6,20 @@ public class Board {
     private Character[][] board = new Character[BOARD_SIZE][BOARD_SIZE];
     // For now, H = Head of snake, S = Body of snake, F = Food, O = Void cell
     // Later on we could make a Cell class if we need a finer implementation.
+    // Board(String testing) is used for test purposes
+
+    public Board(String testing) {
+        //Mark all spots as empty
+        for (int i = 0; i < BOARD_SIZE; i++) {
+            for (int j = 0; j < BOARD_SIZE; j++) {
+                this.board[i][j] = 'O';
+            }
+        }
+
+        // Puts Head and Food at the center next to each other
+        this.board[4][4] = 'H';
+        this.board[4][5] = 'F';
+    }
 
     public Board() {
         //Mark all spots as empty
@@ -52,11 +66,11 @@ public class Board {
         for (int i = 0; i < Board.getBoardSize(); i++) {
             for (int j = 0; j < Board.getBoardSize(); j++) {
                 if (this.getCell(i, j) == 'H') {
-                    return new int[]{i,j};
+                    return new int[]{i, j};
                 }
             }
         }
-        return new int[]{-1,-1};  // error case
+        return new int[]{-1, -1};  // error case
     }
 
 }
