@@ -2,6 +2,9 @@ import java.util.Random;
 
 public class Board {
     private static final int BOARD_SIZE = 9;
+    private int colHead = 0;
+    private int rowHead = 0;
+
     private Character[][] board = new Character[BOARD_SIZE][BOARD_SIZE];
     // For now, H = Head of snake, S = Body of snake, F = Food, O = Void cell
     // Later on we could make a Cell class if we need a finer implementation.
@@ -16,7 +19,9 @@ public class Board {
 
         //Place the snake's head in a random spot
         Random rng = new Random();
-        this.board[rng.nextInt(BOARD_SIZE)][rng.nextInt(BOARD_SIZE)] = 'H';
+        colHead = rng.nextInt(BOARD_SIZE);
+        rowHead = rng.nextInt(BOARD_SIZE);
+        this.board[rowHead][colHead] = 'H';
 
         //Place the food in an empty random spot
         int random_i_for_food = rng.nextInt(BOARD_SIZE);
@@ -44,5 +49,13 @@ public class Board {
     public void setCell(int i, int j, Character charToPutInCell) {
         board[i][j] = charToPutInCell;
     }
+
+    public int getColHead() { return colHead; }
+
+    public int getRowHead() { return colHead; }
+
+    //public Character getColFood() {}
+
+    //public Character getRowFood() {}
 
 }
