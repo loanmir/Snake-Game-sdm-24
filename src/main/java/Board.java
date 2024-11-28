@@ -1,48 +1,54 @@
 import java.util.Random;
 
 public class Board {
-    private static final int BOARD_SIZE = 9;
+    private static final int BOARD_SIZE = 11;
 
-    private Character[][] board = new Character[BOARD_SIZE][BOARD_SIZE];
-    // For now, H = Head of snake, S = Body of snake, F = Food, O = Void cell
-    // Later on we could make a Cell class if we need a finer implementation.
+    private Cell[][] board = new Cell[BOARD_SIZE][BOARD_SIZE];
     // Board(String testing) is used for test purposes
 
     public Board(String testing) {
-        //Mark all spots as empty
+        //Mark all spots as BLANK in the center and WALL on the borders
         for (int i = 0; i < BOARD_SIZE; i++) {
             for (int j = 0; j < BOARD_SIZE; j++) {
-                this.board[i][j] = 'O';
+                if (i == 0 || i == 10 || j == 0 || j == 10) {
+                    this.board[i][j] = Cell.WALL;
+                } else {
+                    this.board[i][j] = Cell.BLANK;
+                }
             }
         }
 
         // Puts Head and Food at the center next to each other
-        this.board[4][4] = 'H';
-        this.board[4][5] = 'F';
+        this.board[5][5] = Cell.HEAD;
+        this.board[5][6] = Cell.FOOD;
     }
 
     public Board() {
-        //Mark all spots as empty
+        //Mark all spots as BLANK in the center and WALL on the borders
         for (int i = 0; i < BOARD_SIZE; i++) {
             for (int j = 0; j < BOARD_SIZE; j++) {
-                this.board[i][j] = 'O';
+                if (i == 0 || i == 10 || j == 0 || j == 10) {
+                    this.board[i][j] = Cell.WALL;
+                } else {
+                    this.board[i][j] = Cell.BLANK;
+                }
             }
         }
 
         //Place the snake's head in a random spot
         Random rng = new Random();
-        int colHead = rng.nextInt(BOARD_SIZE);
-        int rowHead = rng.nextInt(BOARD_SIZE);
-        this.board[rowHead][colHead] = 'H';
+        int colHead = rng.nextInt((BOARD_SIZE - 2)) + 1; //random number between 1 and 9, i.e. non-Wall cells
+        int rowHead = rng.nextInt((BOARD_SIZE - 2)) + 1;
+        this.board[rowHead][colHead] = Cell.HEAD;
 
         //Place the food in an empty random spot
-        int random_i_for_food = rng.nextInt(BOARD_SIZE);
-        int random_j_for_food = rng.nextInt(BOARD_SIZE);
-        while (this.board[random_i_for_food][random_j_for_food] != 'O') {
-            random_i_for_food = rng.nextInt(BOARD_SIZE);
-            random_j_for_food = rng.nextInt(BOARD_SIZE);
+        int random_i_for_food = rng.nextInt((BOARD_SIZE - 2)) + 1;
+        int random_j_for_food = rng.nextInt((BOARD_SIZE - 2)) + 1;
+        while (this.board[random_i_for_food][random_j_for_food] != Cell.BLANK) {
+            random_i_for_food = rng.nextInt((BOARD_SIZE - 2)) + 1;
+            random_j_for_food = rng.nextInt((BOARD_SIZE - 2)) + 1;
         }
-        this.board[random_i_for_food][random_j_for_food] = 'F';
+        this.board[random_i_for_food][random_j_for_food] = Cell.FOOD;
 
     }
 
@@ -50,22 +56,22 @@ public class Board {
         return BOARD_SIZE;
     }
 
-    public Character[][] getBoard() {
+    public Cell[][] getBoard() {
         return board;
     }
 
-    public Character getCell(int i, int j) {
+    public Cell getCell(int i, int j) {
         return board[i][j];
     }
 
-    public void setCell(int i, int j, Character charToPutInCell) {
-        board[i][j] = charToPutInCell;
+    public void setCell(int i, int j, Cell cellContentToPut) {
+        board[i][j] = cellContentToPut;
     }
 
     public int[] getRowColHead() {
         for (int i = 0; i < Board.getBoardSize(); i++) {
             for (int j = 0; j < Board.getBoardSize(); j++) {
-                if (this.getCell(i, j) == 'H') {
+                if (this.getCell(i, j) == Cell.HEAD) {
                     return new int[]{i, j};
                 }
             }

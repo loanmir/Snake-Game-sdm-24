@@ -75,15 +75,15 @@ public class GameWindow extends JFrame implements ActionListener{
 
     static class GamePanel extends JPanel {
         private final SnakeMovement snakeMovement;
-        private Character[][] board;
+        private Cell[][] board;
 
         public GamePanel(SnakeMovement snakeMovement){
             this.snakeMovement = snakeMovement;
-            Character[][] board = snakeMovement.getBoardState();
+            Cell[][] board = snakeMovement.getBoardState();
             this.setBoard(board);
         }// constructor
 
-        public void setBoard(Character[][] board) {
+        public void setBoard(Cell[][] board) {
             this.board = board;
             repaint(); // Request the panel to be repainted
         }//setting up board
@@ -100,13 +100,15 @@ public class GameWindow extends JFrame implements ActionListener{
                         int y = i * cellSize; // Vertical position of the cell
 
                         switch(board[i][j]){
-                            case 'O':
+                            case BLANK:
                                 g.setColor(Color.WHITE);
-                            case 'F':
+                            case WALL:
+                                g.setColor(Color.GRAY);
+                            case FOOD:
                                 g.setColor(Color.RED);
-                            case 'S':
+                            case BODY:
                                 g.setColor(Color.GREEN);
-                            case 'H':
+                            case HEAD:
                                 g.setColor(Color.BLUE);
                                 break;
                             default:
@@ -137,7 +139,7 @@ public class GameWindow extends JFrame implements ActionListener{
 
             frame.setSize(500,500);
 
-            Character[][] board = snakeMovement.getBoardState();
+            Cell[][] board = snakeMovement.getBoardState();
             gamePanel.setBoard(board);
 
             frame.setVisible(true);

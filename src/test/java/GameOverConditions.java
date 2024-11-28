@@ -9,7 +9,7 @@ public class GameOverConditions {
     void deathByBorderCollision(){
         //head of the snake up and left
         Board board = new Board("");
-        board.setCell(0, 0, 'H');
+        board.setCell(0, 0, Cell.HEAD);
         SnakeMovement snakeMovement = new SnakeMovement(board);
 
         // moving the head up
@@ -23,10 +23,10 @@ public class GameOverConditions {
     @Disabled
     void deathBySelfCollision(){
                    Board board = new Board("");
-            board.setCell(4, 4, 'H');  // head
-            board.setCell(4, 3, 'S');  // body
-            board.setCell(5, 3, 'S');  // body
-            board.setCell(5, 4, 'S');  // body
+            board.setCell(4, 4, Cell.HEAD);  // head
+            board.setCell(4, 3, Cell.BODY);  // body
+            board.setCell(5, 3, Cell.BODY);  // body
+            board.setCell(5, 4, Cell.BODY);  // body
 
             SnakeMovement snakeMovement = new SnakeMovement(board);
 
