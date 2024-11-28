@@ -55,4 +55,10 @@ public class SnakeMovement {
         rowColHead[1]++;
         board.setCell(rowColHead[0], rowColHead[1], 'H');
     }
+
+        public Character[][] getBoardState(){
+            return this.board.getBoard();
+        }
+
+
 }

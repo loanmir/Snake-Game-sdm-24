@@ -5,14 +5,23 @@ import java.awt.event.*;
 
 
 public class GameWindow extends JFrame implements ActionListener{
+    private final SnakeMovement snakeMovement;
+    // Class extending JPanel for the game interface
+    private final GamePanel gamePanel;
+
+    // Jpanel for the menu interface
     JPanel menuPanel;
+
+    // Buttons needed
     JButton newGameButton;
     JButton exitGameButton;
 
-    public GameWindow() {
+    public GameWindow(SnakeMovement snakeMovement) {
+        this.snakeMovement = snakeMovement;
         this.setTitle("Snake Game");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Default exit operation
         this.setLayout(new BorderLayout());
+        this.gamePanel = new GamePanel(snakeMovement); // snakeMovement works as controller
         this.menuPanel = setMenu();
         this.add(menuPanel);
         this.setVisible(true);
@@ -54,9 +63,88 @@ public class GameWindow extends JFrame implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e){
         if(e.getSource() == newGameButton){
-            System.out.println("new game!!!!");
+            GamePlay gameplay = new GamePlay(this);
+            gameplay.start();
+            //System.out.println("new game!!!!");
         } else if(e.getSource() == exitGameButton){
             this.dispose();
+        } else {
+            throw new IllegalStateException("Unexpected value: " + e.getSource());
         }
     }
-}
+
+    static class GamePanel extends JPanel {
+        private final SnakeMovement snakeMovement;
+        private Character[][] board;
+
+        public GamePanel(SnakeMovement snakeMovement){
+            this.snakeMovement = snakeMovement;
+            Character[][] board = snakeMovement.getBoardState();
+            this.setBoard(board);
+        }// constructor
+
+        public void setBoard(Character[][] board) {
+            this.board = board;
+            repaint(); // Request the panel to be repainted
+        }//setting up board
+
+        @Override
+        protected void paintComponent(Graphics g){
+            super.paintComponent(g);
+            if(board != null){
+                int cellSize = 35;
+
+                for (int i = 0; i < board.length;i++){
+                    for(int j = 0; j < board[i].length; j++){
+                        int x = j * cellSize; // Horizontal position of the cell
+                        int y = i * cellSize; // Vertical position of the cell
+
+                        switch(board[i][j]){
+                            case 'O':
+                                g.setColor(Color.WHITE);
+                            case 'F':
+                                g.setColor(Color.RED);
+                            case 'S':
+                                g.setColor(Color.GREEN);
+                            case 'H':
+                                g.setColor(Color.BLUE);
+                                break;
+                            default:
+                                throw new RuntimeException("Draw game error out of bounds");
+                        }//switch
+                        g.fillRect(x, y, cellSize, cellSize);
+                    }
+                }
+                g.setColor(Color.BLACK);
+            }// if statement
+
+        }
+
+    }// GamePanel class
+
+    class GamePlay extends Thread{
+        private final JFrame frame;
+
+        public GamePlay(JFrame frame){
+            this.frame = frame;
+        }
+
+        @Override
+        public void run(){
+            frame.remove(menuPanel);
+            frame.add(gamePanel,BorderLayout.CENTER);
+            frame.setFocusable(true);
+
+            frame.setSize(500,500);
+
+            Character[][] board = snakeMovement.getBoardState();
+            gamePanel.setBoard(board);
+
+            frame.setVisible(true);
+
+
+        }
+    }//GamePlay class
+
+
+}// GameWindow class
