@@ -11,6 +11,7 @@ public enum Direction{
     Direction(Coordinate vector) {
         this.vector = vector;
     }
+
 }
 
 
