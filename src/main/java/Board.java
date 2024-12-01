@@ -1,8 +1,9 @@
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Board {
-    private static final int BOARD_SIZE = 11;
 
+    private static final int BOARD_SIZE = 11;
     private Cell[][] board = new Cell[BOARD_SIZE][BOARD_SIZE];
     // Board(String testing) is used for test purposes
 
@@ -64,19 +65,38 @@ public class Board {
         return board[i][j];
     }
 
+    public Cell getCell(Coordinate coord) {
+        return board[coord.getY()][coord.getX()];
+    }
+
     public void setCell(int i, int j, Cell cellContentToPut) {
         board[i][j] = cellContentToPut;
     }
 
-    public int[] getRowColHead() {
+    public void setCell(Coordinate coord, Cell cellContentToPut) {
+        board[coord.getY()][coord.getX()] = cellContentToPut;
+    }
+
+    public Coordinate getCoordinateHead() {
         for (int i = 0; i < Board.getBoardSize(); i++) {
             for (int j = 0; j < Board.getBoardSize(); j++) {
                 if (this.getCell(i, j) == Cell.HEAD) {
-                    return new int[]{i, j};
+                    return new Coordinate(i,j);
                 }
             }
         }
-        return new int[]{-1, -1};  // error case
+        return new Coordinate(-1,-1);  // error case
+    }
+
+    public Coordinate getCoordinateFood() {
+        for (int i = 0; i < Board.getBoardSize(); i++) {
+            for (int j = 0; j < Board.getBoardSize(); j++) {
+                if (this.getCell(i, j) == Cell.FOOD) {
+                    return new Coordinate(i,j);
+                }
+            }
+        }
+        return new Coordinate(-1,-1);  // error case
     }
 
 }

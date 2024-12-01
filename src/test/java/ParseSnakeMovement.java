@@ -8,39 +8,35 @@ public class ParseSnakeMovement {
     void headMovedUp() {
         Board board = new Board("");
         SnakeMovement snakeMovement = new SnakeMovement(board);
-        int[] startingRowCol = board.getRowColHead();
         snakeMovement.moveHeadUp();
-        int[] endingRowCol = board.getRowColHead();
-        assertEquals(Cell.HEAD, board.getCell(endingRowCol[0], endingRowCol[1]));
+        Coordinate endingCoordHead = board.getCoordinateHead();
+        assertEquals(Cell.HEAD, board.getCell(endingCoordHead));
     }
 
     @Test
     void headMovedDown() {
         Board board = new Board("");
         SnakeMovement snakeMovement = new SnakeMovement(board);
-        int[] startingRowCol = board.getRowColHead();
         snakeMovement.moveHeadDown();
-        int[] endingRowCol = board.getRowColHead();
-        assertEquals(Cell.HEAD, board.getCell(endingRowCol[0], endingRowCol[1]));
+        Coordinate endingCoordHead = board.getCoordinateHead();
+        assertEquals(Cell.HEAD, board.getCell(endingCoordHead));
     }
 
     @Test
     void headMovedLeft() {
         Board board = new Board("");
         SnakeMovement snakeMovement = new SnakeMovement(board);
-        int[] startingRowCol = board.getRowColHead();
         snakeMovement.moveHeadLeft();
-        int[] endingRowCol = board.getRowColHead();
-        assertEquals(Cell.HEAD, board.getCell(endingRowCol[0], endingRowCol[1]));
+        Coordinate endingCoordHead = board.getCoordinateHead();
+        assertEquals(Cell.HEAD, board.getCell(endingCoordHead));
     }
 
     @Test
     void headMovedRight() {
         Board board = new Board("");
         SnakeMovement snakeMovement = new SnakeMovement(board);
-        int[] startingRowCol = board.getRowColHead();
         snakeMovement.moveHeadRight();
-        int[] endingRowCol = board.getRowColHead();
-        assertEquals(Cell.HEAD, board.getCell(endingRowCol[0], endingRowCol[1]));
+        Coordinate endingCoordHead = board.getCoordinateHead();
+        assertEquals(Cell.HEAD, board.getCell(endingCoordHead));
     }
 }
