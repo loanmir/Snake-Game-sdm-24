@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class SnakeMovement {
 
     private final Board board;
@@ -25,52 +27,60 @@ public class SnakeMovement {
         return false;
     }
 
-    // move the head up one and put an S where the H was
-    public void moveHeadUp() {
+    // move the head up one and put an S where the H was, return the coordinates of the old body.
+    public ArrayList<Coordinate> moveHeadUp(SnakeObj snake) {
         if (currentDirection == Direction.DOWN) {
-            return; // ignore, cannot move in this direction
+            return null; // ignore, cannot move in this direction
         }
         Coordinate coordHead = board.getCoordinateHead();
+        ArrayList<Coordinate> oldCoordBody = snake.getCoordBody();
         board.setCell(coordHead, Cell.BODY);
         coordHead.plus(Direction.UP.vector);
         board.setCell(coordHead, Cell.HEAD);
         currentDirection = Direction.UP;
+        return oldCoordBody;
     }
 
     // move the head down one and put an S where the H was
-    public void moveHeadDown() {
+    public ArrayList<Coordinate> moveHeadDown(SnakeObj snake) {
         if (currentDirection == Direction.UP) {
-            return; //  ignore, cannot move in this direction
+            return null; //  ignore, cannot move in this direction
         }
         Coordinate coordHead = board.getCoordinateHead();
+        ArrayList<Coordinate> oldCoordBody = snake.getCoordBody();
         board.setCell(coordHead, Cell.BODY);
         coordHead.plus(Direction.DOWN.vector);
         board.setCell(coordHead, Cell.HEAD);
         currentDirection = Direction.DOWN;
+        return oldCoordBody;
     }
 
     // move the head left one and put an S where the H was
-    public void moveHeadLeft() {
+    public ArrayList<Coordinate> moveHeadLeft(SnakeObj snake) {
         if (currentDirection == Direction.RIGHT) {
-            return; // ignore, cannot move in this direction
+            return null; // ignore, cannot move in this direction
         }
         Coordinate coordHead = board.getCoordinateHead();
+        ArrayList<Coordinate> oldCoordBody = snake.getCoordBody();
         board.setCell(coordHead, Cell.BODY);
         coordHead.plus(Direction.LEFT.vector);
         board.setCell(coordHead, Cell.HEAD);
         currentDirection = Direction.LEFT;
+        return oldCoordBody;
     }
 
     // move the head right one and put an S where the H was
-    public void moveHeadRight() {
+    public ArrayList<Coordinate> moveHeadRight(SnakeObj snake) {
         if (currentDirection == Direction.LEFT) {
-            return; // ignore, cannot move in this direction
+            return null; // ignore, cannot move in this direction
         }
         Coordinate coordHead = board.getCoordinateHead();
+        ArrayList<Coordinate> oldCoordBody = snake.getCoordBody();
         board.setCell(coordHead, Cell.BODY);
         coordHead.plus(Direction.RIGHT.vector);
         board.setCell(coordHead, Cell.HEAD);
         currentDirection = Direction.UP;
+        return oldCoordBody;
     }
 
     public Direction getCurrentDirection() {
