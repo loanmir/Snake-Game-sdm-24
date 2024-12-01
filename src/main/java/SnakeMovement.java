@@ -28,58 +28,18 @@ public class SnakeMovement {
     }
 
     // move the head up one and put an S where the H was, return the coordinates of the old body.
-    public ArrayList<Coordinate> moveHeadUp(SnakeObj snake) {
-        if (currentDirection == Direction.DOWN) {
+    public ArrayList<Coordinate> moveHead(SnakeObj snake, Direction newDirection) {
+
+        if (currentDirection.isOpposite(newDirection)) {
             return null; // ignore, cannot move in this direction
         }
-        Coordinate coordHead = board.getCoordinateHead();
-        ArrayList<Coordinate> oldCoordBody = snake.getCoordBody();
-        board.setCell(coordHead, Cell.BODY);
-        coordHead.plus(Direction.UP.vector);
-        board.setCell(coordHead, Cell.HEAD);
-        currentDirection = Direction.UP;
-        return oldCoordBody;
-    }
 
-    // move the head down one and put an S where the H was
-    public ArrayList<Coordinate> moveHeadDown(SnakeObj snake) {
-        if (currentDirection == Direction.UP) {
-            return null; //  ignore, cannot move in this direction
-        }
         Coordinate coordHead = board.getCoordinateHead();
         ArrayList<Coordinate> oldCoordBody = snake.getCoordBody();
         board.setCell(coordHead, Cell.BODY);
-        coordHead.plus(Direction.DOWN.vector);
+        coordHead.plus(newDirection.vector);
         board.setCell(coordHead, Cell.HEAD);
-        currentDirection = Direction.DOWN;
-        return oldCoordBody;
-    }
-
-    // move the head left one and put an S where the H was
-    public ArrayList<Coordinate> moveHeadLeft(SnakeObj snake) {
-        if (currentDirection == Direction.RIGHT) {
-            return null; // ignore, cannot move in this direction
-        }
-        Coordinate coordHead = board.getCoordinateHead();
-        ArrayList<Coordinate> oldCoordBody = snake.getCoordBody();
-        board.setCell(coordHead, Cell.BODY);
-        coordHead.plus(Direction.LEFT.vector);
-        board.setCell(coordHead, Cell.HEAD);
-        currentDirection = Direction.LEFT;
-        return oldCoordBody;
-    }
-
-    // move the head right one and put an S where the H was
-    public ArrayList<Coordinate> moveHeadRight(SnakeObj snake) {
-        if (currentDirection == Direction.LEFT) {
-            return null; // ignore, cannot move in this direction
-        }
-        Coordinate coordHead = board.getCoordinateHead();
-        ArrayList<Coordinate> oldCoordBody = snake.getCoordBody();
-        board.setCell(coordHead, Cell.BODY);
-        coordHead.plus(Direction.RIGHT.vector);
-        board.setCell(coordHead, Cell.HEAD);
-        currentDirection = Direction.UP;
+        currentDirection = newDirection;
         return oldCoordBody;
     }
 

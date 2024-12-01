@@ -14,7 +14,7 @@ public class GameOverConditions {
         SnakeObj snake = new SnakeObj();
 
         // moving the head up
-        snakeMovement.moveHeadUp(snake);
+        snakeMovement.moveHead(snake, Direction.UP);
 
         // verify if the game is finished
         assertTrue(snakeMovement.isGameOver());
@@ -33,10 +33,10 @@ public class GameOverConditions {
             SnakeObj snake = new SnakeObj();
 
 
-            snakeMovement.moveHeadLeft(snake); // head on (4, 3)
+            snakeMovement.moveHead(snake, Direction.LEFT); // head on (4, 3)
             assertFalse(snakeMovement.isGameOver()); //ignore -- not valid movement
 
-            snakeMovement.moveHeadDown(snake); // head on (5, 4) --> body collision
+            snakeMovement.moveHead(snake, Direction.DOWN); // head on (5, 4) --> body collision
             assertTrue(snakeMovement.isGameOver());
         }
 

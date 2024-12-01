@@ -13,12 +13,12 @@ public class ParseSnake {
         Board board = new Board("");
         int[][] tmp = {{5,4},{5,3},{5,2},{4,2}};
         SnakeMovement snakeMovement = new SnakeMovement(board);
-        Coordinate coordHead = board.getCoordinateHead();
-        ArrayList<Coordinate> coordBody = Coordinate.coordinateArray(tmp);
+
+        ArrayList<Coordinate> coordBody = Coordinate.createCoordinateArray(tmp);
 
         SnakeObj snake = new SnakeObj(coordBody);
 
-        snakeMovement.moveHeadRight(snake);
+        snakeMovement.moveHead(snake, Direction.RIGHT);
         snake.eatFood();
         ArrayList<Coordinate> newCoordBody= snake.getCoordBody();
 
@@ -31,13 +31,13 @@ public class ParseSnake {
         int[][] tmp = {{5,4},{5,3},{5,2},{4,2}};
 
         SnakeMovement snakeMovement = new SnakeMovement(board);
-        Coordinate coordHead = board.getCoordinateHead();
-        ArrayList<Coordinate> coordBody = Coordinate.coordinateArray(tmp);
+
+        ArrayList<Coordinate> coordBody = Coordinate.createCoordinateArray(tmp);
 
         SnakeObj snake = new SnakeObj(coordBody);
         Coordinate coordTail = new Coordinate(tmp[3]);
 
-        snakeMovement.moveHeadRight(snake);
+        snakeMovement.moveHead(snake, Direction.RIGHT);
         snake.eatFood();
         Coordinate newCoordTail = snake.getCoordinateLastPieceOfBody();
 
@@ -50,13 +50,13 @@ public class ParseSnake {
         int[][] body = {{5,4},{5,3},{5,2},{4,2}};
 
         SnakeMovement snakeMovement = new SnakeMovement(board);
-        Coordinate coordHead = board.getCoordinateHead();
-        ArrayList<Coordinate> coordBody = Coordinate.coordinateArray(body);
+
+        ArrayList<Coordinate> coordBody = Coordinate.createCoordinateArray(body);
 
         SnakeObj snake = new SnakeObj(coordBody);
         Coordinate coordTail = new Coordinate(body[3]);
 
-        snakeMovement.moveHeadRight(snake);
+        snakeMovement.moveHead(snake, Direction.RIGHT);
         snake.eatFood();
         Coordinate newCoordTail = snake.getCoordinateLastPieceOfBody();
 

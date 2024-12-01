@@ -20,7 +20,7 @@ public class Coordinate {
         this.y = coord.getY();
     }
 
-    public static ArrayList<Coordinate> coordinateArray(int[][] rowColArray) {
+    public static ArrayList<Coordinate> createCoordinateArray(int[][] rowColArray) {
         ArrayList<Coordinate> coordArray = new ArrayList<>();
         for (int[] value : rowColArray) {
             if(value.length == 2) {
