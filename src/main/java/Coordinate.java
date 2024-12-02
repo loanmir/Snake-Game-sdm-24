@@ -20,6 +20,7 @@ public class Coordinate {
         this.y = coord.getY();
     }
 
+    // static method to get an ArrayList<Coordinate> from an int[][]
     public static ArrayList<Coordinate> createCoordinateArray(int[][] rowColArray) {
         ArrayList<Coordinate> coordArray = new ArrayList<>();
         for (int[] value : rowColArray) {
@@ -50,6 +51,7 @@ public class Coordinate {
     }
     */
 
+    // Changing of coordinates
     public Coordinate plus(Coordinate coordinate) {
         this.x += coordinate.getX();
         this.y += coordinate.getY();

@@ -1,16 +1,16 @@
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class SnakeObj {
+public class Snake {
     private ArrayList<Coordinate> coordBody;
 
     // CoordBody[0] refers to the parte of the body closest to the head
 
-    public SnakeObj(ArrayList<Coordinate> coordBody) {
+    public Snake(ArrayList<Coordinate> coordBody) {
         this.coordBody = coordBody;
     }
 
-    public SnakeObj() {
+    public Snake() {
         this.coordBody = null;
     }
 
@@ -30,8 +30,8 @@ public class SnakeObj {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof SnakeObj snakeObj)) return false;
-        return Objects.equals(getCoordBody(), snakeObj.getCoordBody());
+        if (!(o instanceof Snake snake)) return false;
+        return Objects.equals(getCoordBody(), snake.getCoordBody());
     }
 
     @Override

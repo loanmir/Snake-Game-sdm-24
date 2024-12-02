@@ -1,4 +1,3 @@
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -21,7 +20,7 @@ public class ParseSnake {
 
         System.out.println("WOW " + coordBody.size());
 
-        SnakeObj snake = new SnakeObj(coordBody);
+        Snake snake = new Snake(coordBody);
 
         System.out.println(board.getCoordinateHead().getX());
         System.out.println(board.getCoordinateHead().getY());
@@ -53,7 +52,7 @@ public class ParseSnake {
 
         ArrayList<Coordinate> coordBody = Coordinate.createCoordinateArray(tmp);
 
-        SnakeObj snake = new SnakeObj(coordBody);
+        Snake snake = new Snake(coordBody);
         Coordinate coordTail = new Coordinate(tmp[3]);
 
         snakeMovement.moveHead(snake, Direction.RIGHT);
@@ -71,7 +70,7 @@ public class ParseSnake {
 
         ArrayList<Coordinate> coordBody = Coordinate.createCoordinateArray(body);
 
-        SnakeObj snake = new SnakeObj(coordBody);
+        Snake snake = new Snake(coordBody);
         Coordinate coordTail = new Coordinate(body[3]);
 
         snakeMovement.moveHead(snake, Direction.RIGHT);
