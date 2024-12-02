@@ -28,19 +28,50 @@ public class SnakeMovement {
     }
 
     // move the head up one and put an S where the H was, return the coordinates of the old body.
-    public ArrayList<Coordinate> moveHead(SnakeObj snake, Direction newDirection) {
-
+    public void moveHead(SnakeObj snake, Direction newDirection) {
         if (currentDirection.isOpposite(newDirection)) {
-            return null; // ignore, cannot move in this direction
+            return; // ignore, cannot move in this direction
         }
 
-        Coordinate coordHead = board.getCoordinateHead();
-        ArrayList<Coordinate> oldCoordBody = snake.getCoordBody();
-        board.setCell(coordHead, Cell.BODY);
-        coordHead.plus(newDirection.vector);
-        board.setCell(coordHead, Cell.HEAD);
+        ArrayList<Coordinate> coordOldBody = snake.getCoordBody();
+        Coordinate coordOldHead = board.getCoordinateHead();
+        Coordinate coordFood = board.getCoordinateFood();
+        System.out.println("coordFood X,Y: " + coordFood.getX()+","+coordFood.getY());
+        Coordinate coordNewHead = coordOldHead.plus(newDirection.vector);
+        System.out.println("coordNewHead X,Y: " + coordNewHead.getX()+","+coordNewHead.getY());
+
+
+        if (coordOldBody == null) {  // Movement when snake has no body
+            System.out.println("coordNewHead " + coordNewHead);
+            if(coordNewHead.equals(coordFood)) {  // Move and eat
+                ArrayList<Coordinate> coordNewBody = new ArrayList<>();
+                coordNewBody.add(coordOldHead);
+                snake.setCoordBody(coordNewBody);
+                board.setCell(coordOldHead, Cell.BODY);
+                board.setCell(coordNewHead, Cell.HEAD);
+            } else {  // just move
+                board.setCell(coordOldHead, Cell.BLANK);
+                board.setCell(coordNewHead, Cell.HEAD);
+            }
+        }
+        else { // Movement when snake has a body
+            ArrayList<Coordinate> coordNewBody = snake.getCoordBody();
+            int i = coordNewBody.size();
+            if (coordNewHead.equals(coordFood)) {  // Move and eat
+                coordNewBody.add(0, coordOldHead);
+                board.setCell(coordOldHead, Cell.BODY);
+                board.setCell(coordNewHead, Cell.HEAD);
+                snake.setCoordBody(coordNewBody);
+            } else {  // just move
+                board.setCell(coordNewBody.get(i - 1), Cell.BLANK);
+                coordNewBody.remove(coordNewBody.size() - 1);
+                board.setCell(coordOldHead, Cell.BODY);
+                coordNewBody.add(0, coordOldHead);
+                board.setCell(coordNewHead, Cell.HEAD);
+                snake.setCoordBody(coordNewBody);
+            }
+        }
         currentDirection = newDirection;
-        return oldCoordBody;
     }
 
     public Direction getCurrentDirection() {

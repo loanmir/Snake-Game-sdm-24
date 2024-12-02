@@ -27,10 +27,6 @@ public class SnakeObj {
         this.coordBody = coordBody;
     }
 
-    public void eatFood() {
-
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

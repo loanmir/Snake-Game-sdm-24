@@ -8,6 +8,7 @@ public class ParseSnakeMovement {
     void headMovedUp() {
         Board board = new Board("");
         SnakeMovement snakeMovement = new SnakeMovement(board);
+        snakeMovement.setCurrentDirection(Direction.RIGHT);
         SnakeObj snake = new SnakeObj();
         snakeMovement.moveHead(snake, Direction.UP);
         Coordinate endingCoordHead = board.getCoordinateHead();
@@ -18,6 +19,7 @@ public class ParseSnakeMovement {
     void headMovedDown() {
         Board board = new Board("");
         SnakeMovement snakeMovement = new SnakeMovement(board);
+        snakeMovement.setCurrentDirection(Direction.RIGHT);
         SnakeObj snake = new SnakeObj();
         snakeMovement.moveHead(snake, Direction.DOWN);
         Coordinate endingCoordHead = board.getCoordinateHead();
@@ -28,6 +30,7 @@ public class ParseSnakeMovement {
     void headMovedLeft() {
         Board board = new Board("");
         SnakeMovement snakeMovement = new SnakeMovement(board);
+        snakeMovement.setCurrentDirection(Direction.DOWN);
         SnakeObj snake = new SnakeObj();
         snakeMovement.moveHead(snake, Direction.LEFT);
         Coordinate endingCoordHead = board.getCoordinateHead();
@@ -38,9 +41,11 @@ public class ParseSnakeMovement {
     void headMovedRight() {
         Board board = new Board("");
         SnakeMovement snakeMovement = new SnakeMovement(board);
+        snakeMovement.setCurrentDirection(Direction.RIGHT);
         SnakeObj snake = new SnakeObj();
         snakeMovement.moveHead(snake, Direction.RIGHT);
         Coordinate endingCoordHead = board.getCoordinateHead();
         assertEquals(Cell.HEAD, board.getCell(endingCoordHead));
     }
+
 }

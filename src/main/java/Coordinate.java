@@ -43,9 +43,17 @@ public class Coordinate {
     }
 
     // Enabling the changing of position
+    /*
     public void plus(Coordinate coordinate) {
         this.x += coordinate.getX();
         this.y += coordinate.getY();
+    }
+    */
+
+    public Coordinate plus(Coordinate coordinate) {
+        this.x += coordinate.getX();
+        this.y += coordinate.getY();
+        return this;
     }
 
     @Override
