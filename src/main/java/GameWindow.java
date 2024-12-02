@@ -92,7 +92,7 @@ public class GameWindow extends JFrame implements ActionListener{
         protected void paintComponent(Graphics g){
             super.paintComponent(g);
             if(board != null){
-                int cellSize = 35;
+                int cellSize = 1;
 
                 for (int i = 0; i < board.length;i++){
                     for(int j = 0; j < board[i].length; j++){
