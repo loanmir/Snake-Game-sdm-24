@@ -12,6 +12,11 @@ public enum Direction{
         this.vector = vector;
     }
 
+    // Method to check if two directions are opposite
+    public boolean isOpposite(Direction other) {
+        return this.vector.getX() + other.vector.getX() == 0 && this.vector.getY() + other.vector.getY() == 0;
+    }
+
 }
 
 

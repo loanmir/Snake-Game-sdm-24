@@ -11,9 +11,10 @@ public class GameOverConditions {
         Board board = new Board("");
         board.setCell(0, 0, Cell.HEAD);
         SnakeMovement snakeMovement = new SnakeMovement(board);
+        Snake snake = new Snake();
 
         // moving the head up
-        snakeMovement.moveHeadUp();
+        snakeMovement.moveHead(snake, Direction.UP);
 
         // verify if the game is finished
         assertTrue(snakeMovement.isGameOver());
@@ -29,12 +30,13 @@ public class GameOverConditions {
             board.setCell(5, 4, Cell.BODY);  // body
 
             SnakeMovement snakeMovement = new SnakeMovement(board);
+            Snake snake = new Snake();
 
 
-            snakeMovement.moveHeadLeft(); // head on (4, 3)
+            snakeMovement.moveHead(snake, Direction.LEFT); // head on (4, 3)
             assertFalse(snakeMovement.isGameOver()); //ignore -- not valid movement
 
-            snakeMovement.moveHeadDown(); // head on (5, 4) --> body collision
+            snakeMovement.moveHead(snake, Direction.DOWN); // head on (5, 4) --> body collision
             assertTrue(snakeMovement.isGameOver());
         }
 
