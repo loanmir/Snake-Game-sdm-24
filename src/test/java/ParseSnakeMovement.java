@@ -11,7 +11,7 @@ public class ParseSnakeMovement {
         int[] startingRowCol = board.getRowColHead();
         snakeMovement.moveHeadUp();
         int[] endingRowCol = board.getRowColHead();
-        assertEquals('H', board.getCell(endingRowCol[0], endingRowCol[1]));
+        assertEquals(Cell.HEAD, board.getCell(endingRowCol[0], endingRowCol[1]));
     }
 
     @Test
@@ -21,7 +21,7 @@ public class ParseSnakeMovement {
         int[] startingRowCol = board.getRowColHead();
         snakeMovement.moveHeadDown();
         int[] endingRowCol = board.getRowColHead();
-        assertEquals('H', board.getCell(endingRowCol[0], endingRowCol[1]));
+        assertEquals(Cell.HEAD, board.getCell(endingRowCol[0], endingRowCol[1]));
     }
 
     @Test
@@ -31,7 +31,7 @@ public class ParseSnakeMovement {
         int[] startingRowCol = board.getRowColHead();
         snakeMovement.moveHeadLeft();
         int[] endingRowCol = board.getRowColHead();
-        assertEquals('H', board.getCell(endingRowCol[0], endingRowCol[1]));
+        assertEquals(Cell.HEAD, board.getCell(endingRowCol[0], endingRowCol[1]));
     }
 
     @Test
@@ -41,6 +41,6 @@ public class ParseSnakeMovement {
         int[] startingRowCol = board.getRowColHead();
         snakeMovement.moveHeadRight();
         int[] endingRowCol = board.getRowColHead();
-        assertEquals('H', board.getCell(endingRowCol[0], endingRowCol[1]));
+        assertEquals(Cell.HEAD, board.getCell(endingRowCol[0], endingRowCol[1]));
     }
 }

@@ -13,12 +13,12 @@ public class SnakeMovement {
         int headCol = rowColHead[1];
 
         // Caso 1: La testa esce dal bordo
-        if (headRow < 0 || headRow >= Board.getBoardSize() || headCol < 0 || headCol >= Board.getBoardSize()) {
+        if (headRow <= 0 || headRow >= Board.getBoardSize() - 1 || headCol <= 0 || headCol >= Board.getBoardSize() - 1) {
             return true;
         }
 
         // Caso 2: La testa tocca il corpo
-        if (board.getCell(headRow, headCol) == 'S') {
+        if (board.getCell(headRow, headCol) == Cell.BODY) {
             return true;
         }
 
@@ -31,9 +31,9 @@ public class SnakeMovement {
             return; // ignore, cannot move in this direction
         }
         int[] rowColHead = board.getRowColHead();
-        board.setCell(rowColHead[0], rowColHead[1], 'S');
+        board.setCell(rowColHead[0], rowColHead[1], Cell.BODY);
         rowColHead[0]++;
-        board.setCell(rowColHead[0], rowColHead[1], 'H');
+        board.setCell(rowColHead[0], rowColHead[1], Cell.HEAD);
         currentDirection = Direction.UP;
     }
 
@@ -43,9 +43,9 @@ public class SnakeMovement {
             return; //  ignore, cannot move in this direction
         }
         int[] rowColHead = board.getRowColHead();
-        board.setCell(rowColHead[0], rowColHead[1], 'S');
+        board.setCell(rowColHead[0], rowColHead[1], Cell.BODY);
         rowColHead[0]--;
-        board.setCell(rowColHead[0], rowColHead[1], 'H');
+        board.setCell(rowColHead[0], rowColHead[1], Cell.HEAD);
         currentDirection = Direction.DOWN;
     }
 
@@ -55,9 +55,9 @@ public class SnakeMovement {
             return; // ignore, cannot move in this direction
         }
         int[] rowColHead = board.getRowColHead();
-        board.setCell(rowColHead[0], rowColHead[1], 'S');
+        board.setCell(rowColHead[0], rowColHead[1], Cell.BODY);
         rowColHead[1]--;
-        board.setCell(rowColHead[0], rowColHead[1], 'H');
+        board.setCell(rowColHead[0], rowColHead[1], Cell.HEAD);
         currentDirection = Direction.LEFT;
     }
 
@@ -67,22 +67,23 @@ public class SnakeMovement {
             return; // ignore, cannot move in this direction
         }
         int[] rowColHead = board.getRowColHead();
-        board.setCell(rowColHead[0], rowColHead[1], 'S');
+        board.setCell(rowColHead[0], rowColHead[1], Cell.BODY);
         rowColHead[1]++;
-        board.setCell(rowColHead[0], rowColHead[1], 'H');
+        board.setCell(rowColHead[0], rowColHead[1], Cell.HEAD);
         currentDirection = Direction.RIGHT;
     }
 
     public Direction getCurrentDirection() {
         return currentDirection;
     }
+
     public void setCurrentDirection(Direction direction) {
         this.currentDirection = direction;
     }
 
-        public Character[][] getBoardState(){
-            return this.board.getBoard();
-        }
+    public Cell[][] getBoardState() {
+        return this.board.getBoard();
+    }
 
 
 }
