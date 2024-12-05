@@ -50,6 +50,9 @@ public class Board {
         int rowHead = rng.nextInt((BOARD_SIZE - 2)) + 1;
         this.board[rowHead][colHead] = Cell.HEAD;
 
+        //Place the food in an empty random spot
+        regenerateFood();
+
            }
 
     public void regenerateFood(){

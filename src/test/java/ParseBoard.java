@@ -6,8 +6,8 @@ import static org.junit.jupiter.api.Assertions.*;
 public class ParseBoard {
 
     @Test
-    void boardSizeIsEleven() {
-        assertEquals(11, Board.getBoardSize());
+    void boardSizeIsThirty() {
+        assertEquals(30, Board.getBoardSize());
     }
 
     @Test
@@ -64,7 +64,7 @@ public class ParseBoard {
         Board board = new Board();
         for (int i = 0; i < Board.getBoardSize(); i++) {
             for (int j = 0; j < Board.getBoardSize(); j++) {
-                if (i == 0 || i == 10 || j == 0 || j == 10) {
+                if (i == 0 || i == Board.getBoardSize()-1 || j == 0 || j == Board.getBoardSize()-1) {
                     assertEquals(Cell.WALL, board.getCell(i, j));
                 } else {
                     assertNotEquals(Cell.WALL, board.getCell(i, j));

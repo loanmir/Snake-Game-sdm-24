@@ -3,7 +3,7 @@ import java.util.ArrayList;
 public class SnakeMovement {
 
     private final Board board;
-    //private final Snake snake;
+    private final Snake snake;
     //private final Food food;
     private Direction currentDirection = Direction.NULL;
 
@@ -11,6 +11,10 @@ public class SnakeMovement {
 
     public SnakeMovement(Board board) {
         this.board = board;
+        //The Snake is instantiated with the head's coordinate on the board
+        ArrayList<Coordinate> head = new ArrayList<Coordinate>();
+        head.add(board.getCoordinateHead());
+        this.snake = new Snake(head);
     }
 
     /*public SnakeMovement(Coordinate boardDim) {
@@ -68,7 +72,7 @@ public class SnakeMovement {
     }
 
     // move the head up one and put an S where the H was, return the coordinates of the old body.
-    public void moveHead(Snake snake, Direction newDirection) {
+    public void moveHead(Direction newDirection) {
         if (currentDirection.isOpposite(newDirection)) {
             return; // ignore, cannot move in this direction
         }

@@ -25,7 +25,7 @@ public class ParseSnake {
         System.out.println(board.getCoordinateHead().getX());
         System.out.println(board.getCoordinateHead().getY());
 
-        snakeMovement.moveHead(snake, Direction.RIGHT);
+        snakeMovement.moveHead(Direction.RIGHT);
 
         System.out.println(board.getCoordinateHead().getX());
         System.out.println(board.getCoordinateHead().getY());
@@ -55,7 +55,7 @@ public class ParseSnake {
         Snake snake = new Snake(coordBody);
         Coordinate coordTail = new Coordinate(tmp[3]);
 
-        snakeMovement.moveHead(snake, Direction.RIGHT);
+        snakeMovement.moveHead(Direction.RIGHT);
         Coordinate newCoordTail = snake.getCoordinateLastPieceOfBody();
 
         assertEquals(coordTail.getY(), newCoordTail.getY());
@@ -73,7 +73,7 @@ public class ParseSnake {
         Snake snake = new Snake(coordBody);
         Coordinate coordTail = new Coordinate(body[3]);
 
-        snakeMovement.moveHead(snake, Direction.RIGHT);
+        snakeMovement.moveHead(Direction.RIGHT);
         Coordinate newCoordTail = snake.getCoordinateLastPieceOfBody();
 
         assertEquals(coordTail.getX(), newCoordTail.getX());
