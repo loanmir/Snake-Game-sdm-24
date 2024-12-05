@@ -15,10 +15,10 @@ Git repository for the final project assignment in Software Development Methods 
 - ogni frame c'è un check delle condizioni di morte e vittoria
 
 
-# Francesco -> SNAKE
-# Lorenzo -> Board 11x11 and cell
-# Lucas -> Graphics
-# Francesca -> testing things xD
+# Francesco -> SNAKE/MOVE SNAKE refactoring using only an array for body coords and considering the coord 0 as head
+# Lorenzo -> Have the move snake instantiate a snake obj and move it
+# Lucas -> Graphics and thread
+# Francesca -> testing things xD (fiocchetto?!?!)
 
 
 
