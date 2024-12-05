@@ -30,7 +30,7 @@ public class ParseSnake {
         System.out.println(board.getCoordinateHead().getX());
         System.out.println(board.getCoordinateHead().getY());
 
-        ArrayList<Coordinate> newCoordBody = snake.getCoordBody();
+        ArrayList<Coordinate> newCoordBody = snake.getBody();
 
         System.out.println(newCoordBody.get(0).getX());
         System.out.println(newCoordBody.get(0).getY());

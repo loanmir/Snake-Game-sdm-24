@@ -3,8 +3,11 @@ import java.util.Random;
 
 public class Board {
 
-    private static final int BOARD_SIZE = 11;
+    //private final Coordinate boardDim;
+    private static final int BOARD_SIZE = 30;
     private Cell[][] board = new Cell[BOARD_SIZE][BOARD_SIZE];
+    //private final Coordinate boardDim;
+    //private final Cell[][] board;
     // Board(String testing) is used for test purposes
 
     public Board(String testing) {
@@ -24,11 +27,16 @@ public class Board {
         this.board[5][6] = Cell.FOOD;
     }
 
+    /*public Board(Coordinate boardDim){
+        this.boardDim = boardDim;
+        this.board = new Cell[boardDim.getX()][boardDim.getY()];
+    }*/
+
     public Board() {
         //Mark all spots as BLANK in the center and WALL on the borders
         for (int i = 0; i < BOARD_SIZE; i++) {
             for (int j = 0; j < BOARD_SIZE; j++) {
-                if (i == 0 || i == 10 || j == 0 || j == 10) {
+                if (i == 0 || i == BOARD_SIZE - 1 || j == 0 || j == BOARD_SIZE - 1) {
                     this.board[i][j] = Cell.WALL;
                 } else {
                     this.board[i][j] = Cell.BLANK;
@@ -53,12 +61,16 @@ public class Board {
 
     }
 
+    /*public Coordinate getBoardDim(){
+        return this.boardDim;
+    }*/
+
     public static int getBoardSize() {
         return BOARD_SIZE;
     }
 
     public Cell[][] getBoard() {
-        return board;
+        return this.board;
     }
 
     public Cell getCell(int i, int j) {

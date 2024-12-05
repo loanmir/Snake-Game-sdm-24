@@ -6,6 +6,7 @@ import java.awt.event.*;
 
 public class GameWindow extends JFrame implements ActionListener{
     private final SnakeMovement snakeMovement;
+    private final Board board;
     // Class extending JPanel for the game interface
     private final GamePanel gamePanel;
 
@@ -16,12 +17,13 @@ public class GameWindow extends JFrame implements ActionListener{
     JButton newGameButton;
     JButton exitGameButton;
 
-    public GameWindow(SnakeMovement snakeMovement) {
+    public GameWindow(SnakeMovement snakeMovement, Board board) {
         this.snakeMovement = snakeMovement;
+        this.board = board;
         this.setTitle("Snake Game");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Default exit operation
         this.setLayout(new BorderLayout());
-        this.gamePanel = new GamePanel(snakeMovement); // snakeMovement works as controller
+        this.gamePanel = new GamePanel(snakeMovement, board); // snakeMovement works as controller
         this.menuPanel = setMenu();
         this.add(menuPanel);
         this.setVisible(true);
@@ -75,39 +77,54 @@ public class GameWindow extends JFrame implements ActionListener{
 
     static class GamePanel extends JPanel {
         private final SnakeMovement snakeMovement;
-        private Cell[][] board;
+        private final Board board;
 
-        public GamePanel(SnakeMovement snakeMovement){
+
+        public GamePanel(SnakeMovement snakeMovement, Board board){
             this.snakeMovement = snakeMovement;
-            Cell[][] board = snakeMovement.getBoardState();
-            this.setBoard(board);
+            //Cell[][] board = snakeMovement.getBoardState();
+            //this.setBoard(board);
+            this.board = board;
         }// constructor
 
-        public void setBoard(Cell[][] board) {
+
+        /*public GamePanel(Cell[][] Board){
+            this.board = board;
+            Cell[][] board = snakeMovement.getBoardState();
+            this.setBoard(board);
+        }// constructor*/
+
+        /*public void setBoard(Cell[][] board) {
             this.board = board;
             repaint(); // Request the panel to be repainted
-        }//setting up board
+        }//setting up board*/
 
         @Override
         protected void paintComponent(Graphics g){
-            super.paintComponent(g);
+            //super.paintComponent(g);
             if(board != null){
-                int cellSize = 1;
+                int cellSize = 20;
 
-                for (int i = 0; i < board.length;i++){
-                    for(int j = 0; j < board[i].length; j++){
+                for (int i = 0; i < board.getBoardSize();i++){
+                    //System.out.println(board[i].getBoardSize());
+                    for(int j = 0; j < board.getBoardSize(); j++){
+                        //System.out.println(board[i].length);
                         int x = j * cellSize; // Horizontal position of the cell
                         int y = i * cellSize; // Vertical position of the cell
 
-                        switch(board[i][j]){
+                        switch(board.getCell(i,j)){
                             case BLANK:
                                 g.setColor(Color.WHITE);
+                                break;
                             case WALL:
-                                g.setColor(Color.GRAY);
+                                g.setColor(Color.BLACK);
+                                break;
                             case FOOD:
                                 g.setColor(Color.RED);
+                                break;
                             case BODY:
                                 g.setColor(Color.GREEN);
+                                break;
                             case HEAD:
                                 g.setColor(Color.BLUE);
                                 break;
@@ -137,10 +154,10 @@ public class GameWindow extends JFrame implements ActionListener{
             frame.add(gamePanel,BorderLayout.CENTER);
             frame.setFocusable(true);
 
-            frame.setSize(500,500);
+            frame.setSize(616,639);
 
             Cell[][] board = snakeMovement.getBoardState();
-            gamePanel.setBoard(board);
+            //gamePanel.setBoard(board);
 
             frame.setVisible(true);
 
