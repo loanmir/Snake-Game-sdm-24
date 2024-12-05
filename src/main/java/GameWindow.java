@@ -128,7 +128,7 @@ public class GameWindow extends JFrame implements ActionListener{
                                 g.setColor(Color.GREEN);
                                 break;
                             case HEAD:
-                                g.setColor(Color.ORANGE);
+                                g.setColor(Color.BLUE);
                                 break;
                             default:
                                 throw new RuntimeException("Draw game error out of bounds");

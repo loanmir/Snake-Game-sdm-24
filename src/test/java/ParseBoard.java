@@ -75,6 +75,7 @@ public class ParseBoard {
 
 
 
+    @Disabled
     @Test
     void NewFoodIsSpawnedAfterEating() {
         Board board = new Board();

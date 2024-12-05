@@ -109,7 +109,6 @@ public class SnakeMovement {
                 board.setCell(coordNewHead, Cell.HEAD);
 
                 snake.setBody(coordNewBody);  // Updating the coord of the body in the snake
-                snake.setBody(coordNewBody);  // Updating the coord of the body in the snake
 
                 // After eating the food, regenerate new food
                 eatFood(coordNewHead);
