@@ -11,7 +11,7 @@ public class GameOverConditions {
         Board board = new Board("");
         board.setCell(0, 0, Cell.HEAD);
         SnakeMovement snakeMovement = new SnakeMovement(board);
-        Snake snake = new Snake();
+        //Snake snake = new Snake();
 
         // moving the head up
         snakeMovement.moveHead(Direction.UP);
@@ -30,7 +30,7 @@ public class GameOverConditions {
             board.setCell(5, 4, Cell.BODY);  // body
 
             SnakeMovement snakeMovement = new SnakeMovement(board);
-            Snake snake = new Snake();
+            //Snake snake = new Snake();
 
 
             snakeMovement.moveHead(Direction.LEFT); // head on (4, 3)

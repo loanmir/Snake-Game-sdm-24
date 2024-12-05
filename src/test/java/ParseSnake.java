@@ -20,7 +20,8 @@ public class ParseSnake {
 
         System.out.println("WOW " + coordBody.size());
 
-        Snake snake = new Snake(coordBody);
+        snakeMovement.getSnake().setBody(coordBody);
+        //Snake snake = new Snake(coordBody);
 
         System.out.println(board.getCoordinateHead().getX());
         System.out.println(board.getCoordinateHead().getY());
@@ -30,7 +31,7 @@ public class ParseSnake {
         System.out.println(board.getCoordinateHead().getX());
         System.out.println(board.getCoordinateHead().getY());
 
-        ArrayList<Coordinate> newCoordBody = snake.getBody();
+        ArrayList<Coordinate> newCoordBody = snakeMovement.getSnake().getBody();
 
         System.out.println(newCoordBody.get(0).getX());
         System.out.println(newCoordBody.get(0).getY());
@@ -52,11 +53,12 @@ public class ParseSnake {
 
         ArrayList<Coordinate> coordBody = Coordinate.createCoordinateArray(tmp);
 
-        Snake snake = new Snake(coordBody);
+        snakeMovement.getSnake().setBody(coordBody);
+        //Snake snake = new Snake(coordBody);
         Coordinate coordTail = new Coordinate(tmp[3]);
 
         snakeMovement.moveHead(Direction.RIGHT);
-        Coordinate newCoordTail = snake.getCoordinateLastPieceOfBody();
+        Coordinate newCoordTail = snakeMovement.getSnake().getCoordinateLastPieceOfBody();
 
         assertEquals(coordTail.getY(), newCoordTail.getY());
     }
@@ -70,11 +72,12 @@ public class ParseSnake {
 
         ArrayList<Coordinate> coordBody = Coordinate.createCoordinateArray(body);
 
-        Snake snake = new Snake(coordBody);
+        snakeMovement.getSnake().setBody(coordBody);
+        //Snake snake = new Snake(coordBody);
         Coordinate coordTail = new Coordinate(body[3]);
 
         snakeMovement.moveHead(Direction.RIGHT);
-        Coordinate newCoordTail = snake.getCoordinateLastPieceOfBody();
+        Coordinate newCoordTail = snakeMovement.getSnake().getCoordinateLastPieceOfBody();
 
         assertEquals(coordTail.getX(), newCoordTail.getX());
     }

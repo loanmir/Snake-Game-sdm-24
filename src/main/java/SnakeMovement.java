@@ -141,6 +141,8 @@ public class SnakeMovement {
         return this.board.getBoard();
     }
 
+    public Snake getSnake() { return snake; }
+
 
 }
 
