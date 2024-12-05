@@ -50,7 +50,11 @@ public class Board {
         int rowHead = rng.nextInt((BOARD_SIZE - 2)) + 1;
         this.board[rowHead][colHead] = Cell.HEAD;
 
+           }
+
+    public void regenerateFood(){
         //Place the food in an empty random spot
+        Random rng = new Random();
         int random_i_for_food = rng.nextInt((BOARD_SIZE - 2)) + 1;
         int random_j_for_food = rng.nextInt((BOARD_SIZE - 2)) + 1;
         while (this.board[random_i_for_food][random_j_for_food] != Cell.BLANK) {
@@ -58,7 +62,6 @@ public class Board {
             random_j_for_food = rng.nextInt((BOARD_SIZE - 2)) + 1;
         }
         this.board[random_i_for_food][random_j_for_food] = Cell.FOOD;
-
     }
 
     /*public Coordinate getBoardDim(){

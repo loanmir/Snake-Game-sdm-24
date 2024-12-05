@@ -57,6 +57,16 @@ public class SnakeMovement {
         return false;
     }
 
+    public void eatFood(Coordinate headPosition) {
+        //if the head is on the cell of food
+        if (board.getCell(headPosition.getY(), headPosition.getX()) == Cell.FOOD) {
+            //set the cell on head position
+            board.setCell(headPosition, Cell.HEAD);
+            // new piece of food generated
+            board.regenerateFood();
+        }
+    }
+
     // move the head up one and put an S where the H was, return the coordinates of the old body.
     public void moveHead(Snake snake, Direction newDirection) {
         if (currentDirection.isOpposite(newDirection)) {
@@ -81,6 +91,10 @@ public class SnakeMovement {
                 snake.setBody(coordNewBody);  // Updating coord body after moving
                 board.setCell(coordOldHead, Cell.BODY);
                 board.setCell(coordNewHead, Cell.HEAD);
+
+                // After eating the food, regenerate new food
+                eatFood(coordNewHead);
+
             } else {  // Move just the head without instantiating the body coords
                 board.setCell(coordOldHead, Cell.BLANK);
                 board.setCell(coordNewHead, Cell.HEAD);
@@ -93,7 +107,13 @@ public class SnakeMovement {
                 coordNewBody.add(0, coordOldHead);  // Adding the coord of the head before the movement to the ArrayList<Coordinate> because the body follows the head
                 board.setCell(coordOldHead, Cell.BODY);
                 board.setCell(coordNewHead, Cell.HEAD);
+
                 snake.setBody(coordNewBody);  // Updating the coord of the body in the snake
+                snake.setBody(coordNewBody);  // Updating the coord of the body in the snake
+
+                // After eating the food, regenerate new food
+                eatFood(coordNewHead);
+
             } else {  // Movement without eating
                 board.setCell(coordOldBody.get(i - 1), Cell.BLANK);  // setting the tail of the snake to blank because we advance one step
                 coordNewBody.remove(coordNewBody.size() - 1);  // removing form the coord of the body the coord of the tail we just changed
@@ -106,7 +126,7 @@ public class SnakeMovement {
         currentDirection = newDirection;
     }
 
-    public Direction getCurrentDirection() {
+    public Direction getCurrentDirection() { //not used
         return currentDirection;
     }
 

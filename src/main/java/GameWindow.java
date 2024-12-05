@@ -103,7 +103,9 @@ public class GameWindow extends JFrame implements ActionListener{
         protected void paintComponent(Graphics g){
             //super.paintComponent(g);
             if(board != null){
+
                 int cellSize = 20;
+
 
                 for (int i = 0; i < board.getBoardSize();i++){
                     //System.out.println(board[i].getBoardSize());
@@ -126,7 +128,7 @@ public class GameWindow extends JFrame implements ActionListener{
                                 g.setColor(Color.GREEN);
                                 break;
                             case HEAD:
-                                g.setColor(Color.BLUE);
+                                g.setColor(Color.ORANGE);
                                 break;
                             default:
                                 throw new RuntimeException("Draw game error out of bounds");

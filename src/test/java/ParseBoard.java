@@ -72,4 +72,23 @@ public class ParseBoard {
             }
         }
     }
+
+
+
+    @Test
+    void NewFoodIsSpawnedAfterEating() {
+        Board board = new Board();
+        Coordinate initialFoodPosition = board.getCoordinateFood(); //initial food position
+        SnakeMovement snakeMovement = new SnakeMovement(board);
+
+        snakeMovement.eatFood(initialFoodPosition);
+        board.regenerateFood(); // new piece of food
+
+        Coordinate newFoodPosition = board.getCoordinateFood(); //new position of the food
+
+        assertNotEquals(initialFoodPosition, newFoodPosition); //new food in a different position
+        assertEquals(Cell.FOOD, board.getCell(newFoodPosition.getY(), newFoodPosition.getX())); //the new position contains the food
+    }
+
+
 }

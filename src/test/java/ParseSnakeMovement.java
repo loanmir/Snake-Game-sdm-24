@@ -1,3 +1,4 @@
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -48,4 +49,10 @@ public class ParseSnakeMovement {
         assertEquals(Cell.HEAD, board.getCell(endingCoordHead));
     }
 
+    @Disabled
+    @Test
+    void foodIsEaten(){
+        //I have to do it :)
+
+    }
 }

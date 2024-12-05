@@ -15,7 +15,7 @@ public class Coordinate {
         this.y = rowCol[0];
     }
 
-    public Coordinate(Coordinate coord){
+    public Coordinate(Coordinate coord){ //not used
         this.x = coord.getX();
         this.y = coord.getY();
     }
