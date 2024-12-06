@@ -3,7 +3,7 @@ import java.util.ArrayList;
 public class SnakeMovement {
 
     private final Board board;
-    private final Snake snake;
+    private Snake snake;
     //private final Food food;
     private Direction currentDirection = Direction.NULL;
 
@@ -188,6 +188,9 @@ public class SnakeMovement {
 
     public Snake getSnake() { return snake; }
 
+    public void setSnake(Snake snake) {
+        this.snake = snake;
+    }
 
 
 }
