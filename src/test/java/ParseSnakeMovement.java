@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class ParseSnakeMovement {
 
     @Test
-    void headMovedUpUpdateSnakeHead() {
+    void headMovedUpNoEatingSnakeHeadGetsUpdated() {
         Board board = new Board("");
         SnakeMovement snakeMovement = new SnakeMovement(board);
         snakeMovement.setCurrentDirection(Direction.RIGHT);
@@ -15,12 +15,23 @@ public class ParseSnakeMovement {
     }
 
     @Test
-    void headMovedUpUpdateSnakeBody() {
+    void headMovedUpNoEatingSnakeBodyGetsUpdated() {
         Board board = new Board("");
         SnakeMovement snakeMovement = new SnakeMovement(board);
         snakeMovement.setCurrentDirection(Direction.RIGHT);
         snakeMovement.moveSnake(Direction.UP);
         assertEquals(Cell.BLANK, board.getCell(5,5));
+    }
+
+    @Test
+    void headMovedUpWhileEatingSnakeBodyGetsUpdated() {
+        Board board = new Board("");
+        board.setCell(5,6, Cell.BLANK);
+        board.setCell(4,5, Cell.FOOD);
+        SnakeMovement snakeMovement = new SnakeMovement(board);
+        snakeMovement.setCurrentDirection(Direction.RIGHT);
+        snakeMovement.moveSnake(Direction.UP);
+        assertEquals(Cell.BODY, board.getCell(5,5));
     }
 
     @Test

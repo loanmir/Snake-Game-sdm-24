@@ -21,10 +21,15 @@ public class SnakeMovement {
     public void moveSnake(Direction direction) {
         if (direction == Direction.UP) {
             ArrayList<Coordinate> coordSnake = snake.getCoordSnake();
-            Coordinate coord = coordSnake.get(0);
-            board.setCell(coord, Cell.BLANK);
-            coord = coord.plus(direction.vector);
-            board.setCell(coord, Cell.HEAD);
+            Coordinate coordSnakeHeadBefore = coordSnake.get(0);
+            board.setCell(coordSnakeHeadBefore, Cell.BLANK);
+            Coordinate coordSnakeHeadAfter = coordSnakeHeadBefore.plus(direction.vector);
+            if (coordSnakeHeadAfter.equals(board.getCoordinateFood())) {
+                board.setCell(coordSnakeHeadBefore, Cell.BODY);
+            }
+            board.setCell(coordSnakeHeadAfter, Cell.HEAD);
+
+
         }
     }
 
