@@ -10,11 +10,10 @@ public class SnakeMovement {
     // CoordBody[0] refers to the parte of the body closest to the head
 
     public SnakeMovement(Board board) {
+        ArrayList<Coordinate> coordSnake = new ArrayList<>();
+        coordSnake.add(board.getCoordinateHead());
         this.board = board;
-        //The Snake is instantiated with the head's coordinate on the board
-        ArrayList<Coordinate> head = new ArrayList<Coordinate>();
-        head.add(board.getCoordinateHead());
-        this.snake = new Snake(head);
+        this.snake = new Snake(coordSnake);
     }
 
     /*public SnakeMovement(Coordinate boardDim) {
@@ -79,7 +78,7 @@ public class SnakeMovement {
 
         // Saving coordOldBody, coordFood, coordOldHead for later use
         // Saving coordNewHead to check if the food is colliding with the head
-        ArrayList<Coordinate> coordOldBody = snake.getBody();
+        ArrayList<Coordinate> coordOldBody = snake.getCoordSnake();
         Coordinate coordOldHead = board.getCoordinateHead();
         Coordinate coordFood = board.getCoordinateFood();
         // System.out.println("coordFood X,Y: " + coordFood.getX()+","+coordFood.getY());
@@ -92,7 +91,7 @@ public class SnakeMovement {
             if(coordNewHead.equals(coordFood)) {  // Move head and instantiate the body coords
                 ArrayList<Coordinate> coordNewBody = new ArrayList<>();  // Instantiate the coord of the body
                 coordNewBody.add(coordOldHead);  // adding the first coord of the ArrayList that is the coord of the head before moving
-                snake.setBody(coordNewBody);  // Updating coord body after moving
+                snake.setCoordSnake(coordNewBody);  // Updating coord body after moving
                 board.setCell(coordOldHead, Cell.BODY);
                 board.setCell(coordNewHead, Cell.HEAD);
 
@@ -105,14 +104,14 @@ public class SnakeMovement {
             }
         }
         else { // Movement when snake has a body
-            ArrayList<Coordinate> coordNewBody = snake.getBody();  // Instantiating the ArrayList<Coordinate> that we modify
+            ArrayList<Coordinate> coordNewBody = snake.getCoordSnake();  // Instantiating the ArrayList<Coordinate> that we modify
             int i = coordNewBody.size();
             if (coordNewHead.equals(coordFood)) {  // Move and eat
                 coordNewBody.add(0, coordOldHead);  // Adding the coord of the head before the movement to the ArrayList<Coordinate> because the body follows the head
                 board.setCell(coordOldHead, Cell.BODY);
                 board.setCell(coordNewHead, Cell.HEAD);
 
-                snake.setBody(coordNewBody);  // Updating the coord of the body in the snake
+                snake.setCoordSnake(coordNewBody);  // Updating the coord of the body in the snake
 
                 // After eating the food, regenerate new food
                 eatFood(coordNewHead);
@@ -123,7 +122,7 @@ public class SnakeMovement {
                 board.setCell(coordOldHead, Cell.BODY);
                 coordNewBody.add(0, coordOldHead);  // Adding the coord of the head before the movement to the ArrayList<Coordinate> because the body follows the head
                 board.setCell(coordNewHead, Cell.HEAD);
-                snake.setBody(coordNewBody);  // Updating the coord of the body in the snake
+                snake.setCoordSnake(coordNewBody);  // Updating the coord of the body in the snake
             }
         }
         currentDirection = newDirection;

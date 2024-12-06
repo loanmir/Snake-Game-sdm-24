@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class Snake {
-    private ArrayList<Coordinate> body;
+    private ArrayList<Coordinate> coordSnake;
     private Coordinate head;
     private Direction direction;
     private int length;
@@ -17,28 +17,29 @@ public class Snake {
         this.body.add(initialPosition);
     }*/
 
-    public Snake(ArrayList<Coordinate> coordBody) {
-        this.body = coordBody;
+    public Snake(ArrayList<Coordinate> coordSnake) {
+        this.coordSnake = coordSnake;
+        this.head = coordSnake.get(0);
+        this.direction = Direction.NULL;
+        this.length = 1;
     }
 
-
     public Snake() {
-        this.body = null;
+        this.coordSnake = null;
     }
 
     /*public ArrayList<Coordinate> getBody() {
         return body;
     }*/
 
-    public void setBody(ArrayList<Coordinate> body) {
-        this.body = body;
+    public void setCoordSnake(ArrayList<Coordinate> coordBody) {
+        this.coordSnake = coordBody;
     }
 
     public Coordinate getCoordinateLastPieceOfBody() {
-        int len = body.toArray().length;
-        return body.get(len-1);
+        int len = coordSnake.toArray().length;
+        return coordSnake.get(len-1);
     }
-
 
     public void grow() {
         length++;
@@ -56,8 +57,8 @@ public class Snake {
         return this.head;
     }
 
-    public ArrayList<Coordinate> getBody() {
-        return this.body;
+    public ArrayList<Coordinate> getCoordSnake() {
+        return this.coordSnake;
     }
 
     public int getLength() {
@@ -74,11 +75,11 @@ public class Snake {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Snake snake)) return false;
-        return Objects.equals(getBody(), snake.getBody());
+        return Objects.equals(getCoordSnake(), snake.getCoordSnake());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getBody());
+        return Objects.hash(getCoordSnake());
     }
 }

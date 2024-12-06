@@ -20,7 +20,7 @@ public class ParseSnake {
 
         System.out.println("WOW " + coordBody.size());
 
-        snakeMovement.getSnake().setBody(coordBody);
+        snakeMovement.getSnake().setCoordSnake(coordBody);
         //Snake snake = new Snake(coordBody);
 
         System.out.println(board.getCoordinateHead().getX());
@@ -31,7 +31,7 @@ public class ParseSnake {
         System.out.println(board.getCoordinateHead().getX());
         System.out.println(board.getCoordinateHead().getY());
 
-        ArrayList<Coordinate> newCoordBody = snakeMovement.getSnake().getBody();
+        ArrayList<Coordinate> newCoordBody = snakeMovement.getSnake().getCoordSnake();
 
         System.out.println(newCoordBody.get(0).getX());
         System.out.println(newCoordBody.get(0).getY());
@@ -53,7 +53,7 @@ public class ParseSnake {
 
         ArrayList<Coordinate> coordBody = Coordinate.createCoordinateArray(tmp);
 
-        snakeMovement.getSnake().setBody(coordBody);
+        snakeMovement.getSnake().setCoordSnake(coordBody);
         //Snake snake = new Snake(coordBody);
         Coordinate coordTail = new Coordinate(tmp[3]);
 
@@ -72,7 +72,7 @@ public class ParseSnake {
 
         ArrayList<Coordinate> coordBody = Coordinate.createCoordinateArray(body);
 
-        snakeMovement.getSnake().setBody(coordBody);
+        snakeMovement.getSnake().setCoordSnake(coordBody);
         //Snake snake = new Snake(coordBody);
         Coordinate coordTail = new Coordinate(body[3]);
 
