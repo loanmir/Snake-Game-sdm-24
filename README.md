@@ -20,5 +20,11 @@ Git repository for the final project assignment in Software Development Methods 
 # Lucas -> Graphics and thread
 # Francesca -> testing things xD (fiocchetto?!?!)
 
-
+# Interesting concepts learnt from leacture
+-  Double tests used for fake tests 
+  - Dummy: never actually used (just to fill parameters)
+  - Fake: have some implementation but some shortcut is taken (not suitable for production)
+  - Subs: still have an implementation but not as advanced ad fake obj., returns a fixed value defined when created
+  - Spies: implementation that just keeps some kinda of data/counter
+  - Mocks: require a library, preprogram. obj. that focuses on the interaction between obj. and mock obj.
 

@@ -30,6 +30,7 @@ public class CellParser {
     @Test
     void cellHasBody() {
         Board board = new Board("");
+        board.setCell(5,4, Cell.BODY);
         assertEquals(board.getCell(5,4), Cell.BODY);
     }
 }

@@ -133,6 +133,8 @@ public class GameWindow extends JFrame implements ActionListener{
                             default:
                                 throw new RuntimeException("Draw game error out of bounds");
                         }//switch
+                        if (i==0 && j==0) {g.setColor(Color.YELLOW);}
+                        if (i==board.getBoardSize()-1 && j==board.getBoardSize()-1) {g.setColor(Color.magenta);}
                         g.fillRect(x, y, cellSize, cellSize);
                     }
                 }

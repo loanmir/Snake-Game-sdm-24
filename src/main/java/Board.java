@@ -23,7 +23,6 @@ public class Board {
         }
 
         // Puts Head and Food at the center next to each other
-        this.board[5][4] = Cell.BODY;
         this.board[5][5] = Cell.HEAD;
         this.board[5][6] = Cell.FOOD;
     }

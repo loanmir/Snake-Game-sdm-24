@@ -55,7 +55,7 @@ public class Coordinate {
     public Coordinate plus(Coordinate coordinate) {
         this.x += coordinate.getX();
         this.y += coordinate.getY();
-        return this;
+        return new Coordinate(this.y, this.x);
     }
 
     @Override

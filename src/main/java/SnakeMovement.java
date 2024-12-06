@@ -10,10 +10,19 @@ public class SnakeMovement {
     // CoordBody[0] refers to the parte of the body closest to the head
 
     public SnakeMovement(Board board) {
+        // This constructor instantiate a Snake object with only the head
+        // If we need a snake with more than just the head we should modify it with snake.setCoordSnake(ArrayList<Coordinates>)
         ArrayList<Coordinate> coordSnake = new ArrayList<>();
         coordSnake.add(board.getCoordinateHead());
         this.board = board;
         this.snake = new Snake(coordSnake);
+    }
+
+    public void moveSnake(Direction direction) {
+        if (direction == Direction.UP) {
+            board.setCell(5,5, Cell.BLANK);
+            board.setCell(4,5, Cell.HEAD);
+        }
     }
 
     /*public SnakeMovement(Coordinate boardDim) {
@@ -61,17 +70,15 @@ public class SnakeMovement {
     }
 
     public void eatFood(Coordinate headPosition) {
-        //if the head is on the cell of food
-        if (board.getCell(headPosition.getY(), headPosition.getX()) == Cell.FOOD) {
-            //set the cell on head position
-            board.setCell(headPosition, Cell.HEAD);
-            // new piece of food generated
-            board.regenerateFood();
-        }
+        // new piece of food generated
+        board.regenerateFood();
     }
 
+
     // move the head up one and put an S where the H was, return the coordinates of the old body.
-    public void moveHead(Direction newDirection) {
+
+    /*
+    public void moveSnake(Direction newDirection) {
         if (currentDirection.isOpposite(newDirection)) {
             return; // ignore, cannot move in this direction
         }
@@ -127,6 +134,37 @@ public class SnakeMovement {
         }
         currentDirection = newDirection;
     }
+     */
+
+    /*
+    public void moveSnake(Direction newDirection) {
+        if (currentDirection.isOpposite(newDirection) && snake.getLength() != 1) {
+            return; // ignore, cannot move in this direction
+        } else {
+            snake.setDirection(newDirection);  // Update the direction of snake
+            ArrayList<Coordinate> tmpCoordSnake = snake.getCoordSnake();  // save coord for later use
+            ArrayList<Coordinate> coordSnakeBeforeMovement = snake.getCoordSnake();  // save coord for later use
+            Coordinate tmpCoordSnakeHead = tmpCoordSnake.get(0);  // save coord for later use
+            tmpCoordSnakeHead.plus(newDirection.vector);  // coordinate of the new head
+            tmpCoordSnake.add(0, tmpCoordSnakeHead); // new coordinate added
+            if (board.getCell(tmpCoordSnakeHead) == Cell.FOOD) {
+                this.eatFood(tmpCoordSnakeHead);
+            } else {
+                board.setCell(tmpCoordSnake.get(tmpCoordSnake.size()-1), Cell.BLANK);
+                tmpCoordSnake.remove(tmpCoordSnake.size()-1);
+            }
+            snake.setCoordSnake(tmpCoordSnake);
+            //set the cell on head position
+            board.setCell(tmpCoordSnakeHead, Cell.HEAD);
+            if (tmpCoordSnake.size() != 1) {
+                board.setCell(coordSnakeBeforeMovement.get(0), Cell.BODY);
+            } else {
+                board.setCell(coordSnakeBeforeMovement.get(0), Cell.BLANK);
+            }
+
+        }
+    }
+     */
 
     public Direction getCurrentDirection() { //not used
         return currentDirection;
@@ -141,6 +179,7 @@ public class SnakeMovement {
     }
 
     public Snake getSnake() { return snake; }
+
 
 
 }

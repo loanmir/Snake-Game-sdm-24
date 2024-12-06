@@ -32,8 +32,8 @@ public class Snake {
         return body;
     }*/
 
-    public void setCoordSnake(ArrayList<Coordinate> coordBody) {
-        this.coordSnake = coordBody;
+    public void setCoordSnake(ArrayList<Coordinate> coordSnake) {
+        this.coordSnake = coordSnake;
     }
 
     public Coordinate getCoordinateLastPieceOfBody() {
