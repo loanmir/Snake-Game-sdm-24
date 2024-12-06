@@ -6,21 +6,21 @@ import static org.junit.jupiter.api.Assertions.*;
 public class ParseSnakeMovement {
 
     @Test
-    void headMovedUp() {
+    void headMovedUpdateSnakeHead() {
         Board board = new Board("");
         SnakeMovement snakeMovement = new SnakeMovement(board);
         snakeMovement.setCurrentDirection(Direction.RIGHT);
-        //Snake snake = new Snake();
-        Cell tmp0 = board.getCell(5,5);
-        Cell tmp1 = board.getCell(4,5);
         snakeMovement.moveSnake(Direction.UP);
-        Cell tmp2 = board.getCell(4,5);
-        Cell tmp3 = board.getCell(5,5);
-        System.out.println("Arriving cell before:"+tmp2);
-        System.out.println("Starting cell before:"+tmp0);
-        System.out.println("Arriving cell after:"+tmp1);
-        System.out.println("Starting cell after:"+tmp3);
         assertEquals(Cell.HEAD, board.getCell(4,5));
+    }
+
+    @Test
+    void headMovedUpdateSnakeBody() {
+        Board board = new Board("");
+        SnakeMovement snakeMovement = new SnakeMovement(board);
+        snakeMovement.setCurrentDirection(Direction.RIGHT);
+        snakeMovement.moveSnake(Direction.UP);
+        assertEquals(Cell.BLANK, board.getCell(5,5));
     }
 
     @Test
