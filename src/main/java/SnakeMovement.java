@@ -20,8 +20,11 @@ public class SnakeMovement {
 
     public void moveSnake(Direction direction) {
         if (direction == Direction.UP) {
-            board.setCell(5,5, Cell.BLANK);
-            board.setCell(4,5, Cell.HEAD);
+            ArrayList<Coordinate> coordSnake = snake.getCoordSnake();
+            Coordinate coord = coordSnake.get(0);
+            board.setCell(coord, Cell.BLANK);
+            coord = coord.plus(direction.vector);
+            board.setCell(coord, Cell.HEAD);
         }
     }
 
