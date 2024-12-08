@@ -19,19 +19,33 @@ public class SnakeMovement {
     }
 
     public void moveSnake(Direction direction) {
-        if (direction == Direction.UP) {
-            ArrayList<Coordinate> coordSnake = snake.getCoordSnake();
-            Coordinate coordSnakeHeadBefore = coordSnake.get(0);
-            board.setCell(coordSnakeHeadBefore, Cell.BLANK);
-            Coordinate coordSnakeHeadAfter = coordSnakeHeadBefore.plus(direction.vector);
-            if (coordSnakeHeadAfter.equals(board.getCoordinateFood())) {
-                board.setCell(coordSnakeHeadBefore, Cell.BODY);
-            }
-            board.setCell(coordSnakeHeadAfter, Cell.HEAD);
+        ArrayList<Coordinate> coordSnake = snake.getCoordSnake();  // get current snake coord
+        Coordinate coordSnakeTail = coordSnake.get(coordSnake.size() - 1);  // get current tail coord
+        Coordinate coordSnakeHeadBefore = coordSnake.get(0);  // get current head
 
+        // Calculate new head position
+        Coordinate coordSnakeHeadAfter = coordSnakeHeadBefore.plus(direction.vector);
 
+        // Determine if snake grows (eats food)
+        boolean grows = coordSnakeHeadAfter.equals(board.getCoordinateFood());
+
+        // Update the board and snake coordinates
+        board.setCell(coordSnakeHeadBefore, Cell.BODY); // Current head becomes body
+        coordSnake.add(0, coordSnakeHeadAfter); // Add new head
+
+        if (!grows) {
+            // Remove tail if not growing
+            coordSnake.remove(coordSnake.size() - 1);
+            board.setCell(coordSnakeTail, Cell.BLANK); // Clear old tail
         }
+
+        // Update the new head on the board
+        board.setCell(coordSnakeHeadAfter, Cell.HEAD);
+
+        // Update snake coordinates
+        snake.setCoordSnake(coordSnake);
     }
+
 
     /*public SnakeMovement(Coordinate boardDim) {
         this.board = new Board(boardDim);
@@ -186,7 +200,9 @@ public class SnakeMovement {
         return this.board.getBoard();
     }
 
-    public Snake getSnake() { return snake; }
+    public Snake getSnake() {
+        return snake;
+    }
 
     public void setSnake(Snake snake) {
         this.snake = snake;
