@@ -2,12 +2,13 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class Snake {
-    private ArrayList<Coordinate> body;
-    private Coordinate head;
-    private Direction direction;
-    private int length;
+    private ArrayList<Coordinate> coordSnake;
 
-    //CoordBody[0] refers to the parte of the body closest to the head
+    //                                                                      //
+    //  CoordBody[0] refers to the parte of the body closest to the head    //
+    //                                                                      //
+
+    // length and head are deprecated, we can just use the array size for length and the pisition at index 0 for the head
 
     /*public Snake(Coordinate initialPosition) {
         this.head = initialPosition;
@@ -17,68 +18,36 @@ public class Snake {
         this.body.add(initialPosition);
     }*/
 
-    public Snake(ArrayList<Coordinate> coordBody) {
-        this.body = coordBody;
+    public Snake(ArrayList<Coordinate> coordSnake) {
+        this.coordSnake = coordSnake;
     }
-
 
     public Snake() {
-        this.body = null;
+        this.coordSnake = null;
     }
 
-    /*public ArrayList<Coordinate> getBody() {
-        return body;
-    }*/
-
-    public void setBody(ArrayList<Coordinate> body) {
-        this.body = body;
+    public void setCoordSnake(ArrayList<Coordinate> coordSnake) {
+        this.coordSnake = coordSnake;
     }
 
     public Coordinate getCoordinateLastPieceOfBody() {
-        int len = body.toArray().length;
-        return body.get(len-1);
+        int len = coordSnake.toArray().length;
+        return coordSnake.get(len-1);
     }
 
-
-    public void grow() {
-        length++;
+    public ArrayList<Coordinate> getCoordSnake() {
+        return this.coordSnake;
     }
-
-    public Direction getDirection() {
-        return this.direction;
-    }
-
-    public void setDirection(Direction direction) {
-        this.direction = direction;
-    }
-
-    public Coordinate getHeadPosition() {
-        return this.head;
-    }
-
-    public ArrayList<Coordinate> getBody() {
-        return this.body;
-    }
-
-    public int getLength() {
-        return this.length;
-    }
-
-    public void setLength(int length) {
-        this.length = length;
-    }
-
-
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Snake snake)) return false;
-        return Objects.equals(getBody(), snake.getBody());
+        return Objects.equals(getCoordSnake(), snake.getCoordSnake());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getBody());
+        return Objects.hash(getCoordSnake());
     }
 }

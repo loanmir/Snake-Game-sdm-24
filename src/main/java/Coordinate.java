@@ -53,9 +53,9 @@ public class Coordinate {
 
     // Changing of coordinates
     public Coordinate plus(Coordinate coordinate) {
-        this.x += coordinate.getX();
-        this.y += coordinate.getY();
-        return this;
+        int tmpX = this.x + coordinate.getX();
+        int tmpY = this.y + coordinate.getY();
+        return new Coordinate(tmpY, tmpX);
     }
 
     @Override

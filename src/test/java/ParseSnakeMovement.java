@@ -1,53 +1,117 @@
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ParseSnakeMovement {
 
     @Test
-    void headMovedUp() {
+    void moveUpNoEatingHeadUpdate() {
         Board board = new Board("");
         SnakeMovement snakeMovement = new SnakeMovement(board);
         snakeMovement.setCurrentDirection(Direction.RIGHT);
-        //Snake snake = new Snake();
-        snakeMovement.moveHead(Direction.UP);
-        Coordinate endingCoordHead = board.getCoordinateHead();
-        assertEquals(Cell.HEAD, board.getCell(endingCoordHead));
+        snakeMovement.moveSnake(Direction.UP);
+        Snake snake = snakeMovement.getSnake();
+        assertEquals(Cell.HEAD, board.getCell(4,5));
+        assertEquals(Cell.BLANK, board.getCell(5,5));
+        assertEquals(1, snake.getCoordSnake().size());
     }
 
     @Test
-    void headMovedDown() {
+    void moveUpEatingHeadUpdate() {
+        Board board = new Board("");
+        board.setCell(5,6, Cell.BLANK);
+        board.setCell(4,5, Cell.FOOD);
+        SnakeMovement snakeMovement = new SnakeMovement(board);
+        snakeMovement.setCurrentDirection(Direction.RIGHT);
+        snakeMovement.moveSnake(Direction.UP);
+        Snake snake = snakeMovement.getSnake();
+        assertEquals(Cell.BODY, board.getCell(5,5));
+        assertEquals(Cell.HEAD, board.getCell(4,5));
+        assertEquals(2, snake.getCoordSnake().size());
+    }
+
+    @Test
+    void moveDownNoEatingHeadUpdate() {
         Board board = new Board("");
         SnakeMovement snakeMovement = new SnakeMovement(board);
         snakeMovement.setCurrentDirection(Direction.RIGHT);
-        //Snake snake = new Snake();
-        snakeMovement.moveHead(Direction.DOWN);
-        Coordinate endingCoordHead = board.getCoordinateHead();
-        assertEquals(Cell.HEAD, board.getCell(endingCoordHead));
+        snakeMovement.moveSnake(Direction.DOWN);
+        Snake snake = snakeMovement.getSnake();
+        assertEquals(Cell.HEAD, board.getCell(6,5));
+        assertEquals(Cell.BLANK, board.getCell(5,5));
+        assertEquals(1, snake.getCoordSnake().size());
     }
 
     @Test
-    void headMovedLeft() {
+    void moveDownEatingHeadUpdate() {
         Board board = new Board("");
+        board.setCell(5,6, Cell.BLANK);
+        board.setCell(6,5, Cell.FOOD);
         SnakeMovement snakeMovement = new SnakeMovement(board);
-        snakeMovement.setCurrentDirection(Direction.DOWN);
-        //Snake snake = new Snake();
-        snakeMovement.moveHead(Direction.LEFT);
-        Coordinate endingCoordHead = board.getCoordinateHead();
-        assertEquals(Cell.HEAD, board.getCell(endingCoordHead));
+        snakeMovement.setCurrentDirection(Direction.RIGHT);
+        snakeMovement.moveSnake(Direction.DOWN);
+        Snake snake = snakeMovement.getSnake();
+        assertEquals(Cell.BODY, board.getCell(5,5));
+        assertEquals(Cell.HEAD, board.getCell(6,5));
+        assertEquals(2, snake.getCoordSnake().size());
     }
 
     @Test
-    void headMovedRight() {
+    void moveLeftNoEatingHeadUpdate() {
         Board board = new Board("");
         SnakeMovement snakeMovement = new SnakeMovement(board);
         snakeMovement.setCurrentDirection(Direction.RIGHT);
-        //Snake snake = new Snake();
-        snakeMovement.moveHead(Direction.RIGHT);
-        Coordinate endingCoordHead = board.getCoordinateHead();
-        assertEquals(Cell.HEAD, board.getCell(endingCoordHead));
+        snakeMovement.moveSnake(Direction.LEFT);
+        Snake snake = snakeMovement.getSnake();
+        assertEquals(Cell.HEAD, board.getCell(5,4));
+        assertEquals(Cell.BLANK, board.getCell(5,5));
+        assertEquals(1, snake.getCoordSnake().size());
     }
+
+    @Test
+    void moveLeftEatingHeadUpdate() {
+        Board board = new Board("");
+        board.setCell(5,6, Cell.BLANK);
+        board.setCell(5,4, Cell.FOOD);
+        SnakeMovement snakeMovement = new SnakeMovement(board);
+        snakeMovement.setCurrentDirection(Direction.RIGHT);
+        snakeMovement.moveSnake(Direction.LEFT);
+        Snake snake = snakeMovement.getSnake();
+        assertEquals(Cell.BODY, board.getCell(5,5));
+        assertEquals(Cell.HEAD, board.getCell(5,4));
+        assertEquals(2, snake.getCoordSnake().size());
+    }
+
+    @Test
+    void moveRightNoEatingHeadUpdate() {
+        Board board = new Board("");
+        board.setCell(5,6, Cell.BLANK);
+        SnakeMovement snakeMovement = new SnakeMovement(board);
+        snakeMovement.setCurrentDirection(Direction.RIGHT);
+        snakeMovement.moveSnake(Direction.RIGHT);
+        Snake snake = snakeMovement.getSnake();
+        assertEquals(Cell.HEAD, board.getCell(5,6));
+        assertEquals(Cell.BLANK, board.getCell(5,5));
+        assertEquals(1, snake.getCoordSnake().size());
+    }
+
+    @Test
+    void moveRightEatingHeadUpdate() {
+        Board board = new Board("");
+        board.setCell(5,6, Cell.BLANK);
+        board.setCell(5,6, Cell.FOOD);
+        SnakeMovement snakeMovement = new SnakeMovement(board);
+        snakeMovement.setCurrentDirection(Direction.RIGHT);
+        snakeMovement.moveSnake(Direction.RIGHT);
+        Snake snake = snakeMovement.getSnake();
+        assertEquals(Cell.BODY, board.getCell(5,5));
+        assertEquals(Cell.HEAD, board.getCell(5,6));
+        assertEquals(2, snake.getCoordSnake().size());
+    }
+
 
     @Disabled
     @Test
