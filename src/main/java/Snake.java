@@ -3,11 +3,12 @@ import java.util.Objects;
 
 public class Snake {
     private ArrayList<Coordinate> coordSnake;
-    private Coordinate head;
-    private Direction direction;
-    private int length;
 
-    //CoordBody[0] refers to the parte of the body closest to the head
+    //                                                                      //
+    //  CoordBody[0] refers to the parte of the body closest to the head    //
+    //                                                                      //
+
+    // length and head are deprecated, we can just use the array size for length and the pisition at index 0 for the head
 
     /*public Snake(Coordinate initialPosition) {
         this.head = initialPosition;
@@ -19,18 +20,11 @@ public class Snake {
 
     public Snake(ArrayList<Coordinate> coordSnake) {
         this.coordSnake = coordSnake;
-        this.head = coordSnake.get(0);
-        this.direction = Direction.NULL;
-        this.length = 1;
     }
 
     public Snake() {
         this.coordSnake = null;
     }
-
-    /*public ArrayList<Coordinate> getBody() {
-        return body;
-    }*/
 
     public void setCoordSnake(ArrayList<Coordinate> coordSnake) {
         this.coordSnake = coordSnake;
@@ -41,35 +35,9 @@ public class Snake {
         return coordSnake.get(len-1);
     }
 
-    public void grow() {
-        length++;
-    }
-
-    public Direction getDirection() {
-        return this.direction;
-    }
-
-    public void setDirection(Direction direction) {
-        this.direction = direction;
-    }
-
-    public Coordinate getHeadPosition() {
-        return this.head;
-    }
-
     public ArrayList<Coordinate> getCoordSnake() {
         return this.coordSnake;
     }
-
-    public int getLength() {
-        return this.length;
-    }
-
-    public void setLength(int length) {
-        this.length = length;
-    }
-
-
 
     @Override
     public boolean equals(Object o) {
