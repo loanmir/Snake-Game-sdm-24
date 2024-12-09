@@ -13,10 +13,8 @@ public class SnakeMovement {
     public SnakeMovement(Board board) {
         // This constructor instantiate a Snake object with only the head
         // If we need a snake with more than just the head we should modify it with snake.setCoordSnake(ArrayList<Coordinates>)
-        ArrayList<Coordinate> coordSnake = new ArrayList<>();
-        coordSnake.add(board.getCoordinateHead());
         this.board = board;
-        this.snake = new Snake(coordSnake);
+        this.snake = new Snake(board.getCoordinateHead());
         this.score = 0;
     }
 
