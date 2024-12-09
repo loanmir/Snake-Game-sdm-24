@@ -4,6 +4,7 @@ public class SnakeMovement {
 
     private final Board board;
     private Snake snake;
+    private int score;
     //private final Food food;
     private Direction currentDirection = Direction.NULL;
 
@@ -16,6 +17,7 @@ public class SnakeMovement {
         coordSnake.add(board.getCoordinateHead());
         this.board = board;
         this.snake = new Snake(coordSnake);
+        this.score = 0;
     }
 
     public void moveSnake(Direction direction) {
@@ -206,6 +208,10 @@ public class SnakeMovement {
 
     public void setSnake(Snake snake) {
         this.snake = snake;
+    }
+
+    public int getScore(){
+        return this.score;
     }
 
 

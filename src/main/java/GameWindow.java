@@ -6,7 +6,7 @@ import java.awt.event.*;
 
 public class GameWindow extends JFrame implements ActionListener{
     private final SnakeMovement snakeMovement;
-    private final Board board;
+    //private final Board board;
     // Class extending JPanel for the game interface
     private final GamePanel gamePanel;
 
@@ -17,13 +17,13 @@ public class GameWindow extends JFrame implements ActionListener{
     JButton newGameButton;
     JButton exitGameButton;
 
-    public GameWindow(SnakeMovement snakeMovement, Board board) {
+    public GameWindow(SnakeMovement snakeMovement) {
         this.snakeMovement = snakeMovement;
-        this.board = board;
+        //this.board = board;
         this.setTitle("Snake Game");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Default exit operation
         this.setLayout(new BorderLayout());
-        this.gamePanel = new GamePanel(snakeMovement, board); // snakeMovement works as controller
+        this.gamePanel = new GamePanel(snakeMovement); // snakeMovement works as controller
         this.menuPanel = setMenu();
         this.add(menuPanel);
         this.setVisible(true);
@@ -77,14 +77,14 @@ public class GameWindow extends JFrame implements ActionListener{
 
     static class GamePanel extends JPanel {
         private final SnakeMovement snakeMovement;
-        private final Board board;
+        private Cell[][] board;
 
 
-        public GamePanel(SnakeMovement snakeMovement, Board board){
+        public GamePanel(SnakeMovement snakeMovement){
             this.snakeMovement = snakeMovement;
-            //Cell[][] board = snakeMovement.getBoardState();
-            //this.setBoard(board);
-            this.board = board;
+            Cell[][] board = snakeMovement.getBoardState();
+            this.setBoard(board);
+            //this.board = board;
         }// constructor
 
 
@@ -94,10 +94,10 @@ public class GameWindow extends JFrame implements ActionListener{
             this.setBoard(board);
         }// constructor*/
 
-        /*public void setBoard(Cell[][] board) {
+        public void setBoard(Cell[][] board) {
             this.board = board;
             repaint(); // Request the panel to be repainted
-        }//setting up board*/
+        }//setting up board
 
         @Override
         protected void paintComponent(Graphics g){
@@ -107,14 +107,14 @@ public class GameWindow extends JFrame implements ActionListener{
                 int cellSize = 20;
 
 
-                for (int i = 0; i < board.getBoardSize();i++){
+                for (int i = 0; i < board.length;i++){
                     //System.out.println(board[i].getBoardSize());
-                    for(int j = 0; j < board.getBoardSize(); j++){
+                    for(int j = 0; j < board[i].length; j++){
                         //System.out.println(board[i].length);
                         int x = j * cellSize; // Horizontal position of the cell
                         int y = i * cellSize; // Vertical position of the cell
 
-                        switch(board.getCell(i,j)){
+                        switch(board[i][j]){
                             case BLANK:
                                 g.setColor(Color.WHITE);
                                 break;
@@ -128,17 +128,23 @@ public class GameWindow extends JFrame implements ActionListener{
                                 g.setColor(Color.GREEN);
                                 break;
                             case HEAD:
-                                g.setColor(Color.BLUE);
+                                g.setColor(new Color(0x006400));
                                 break;
                             default:
                                 throw new RuntimeException("Draw game error out of bounds");
                         }//switch
                         if (i==0 && j==0) {g.setColor(Color.YELLOW);}
-                        if (i==board.getBoardSize()-1 && j==board.getBoardSize()-1) {g.setColor(Color.magenta);}
+                        if (i==board.length - 1 && j==board.length - 1) {g.setColor(Color.MAGENTA);}
                         g.fillRect(x, y, cellSize, cellSize);
+                        if(i != 0 && i != board.length - 1 && j != 0 && j != board[i].length - 1 ){
+                            g.setColor(Color.LIGHT_GRAY);
+                            g.drawRect(x, y, cellSize, cellSize);
+                        }
                     }
                 }
-                g.setColor(Color.BLACK);
+                String scoreText = "Score: " + snakeMovement.getScore();
+                g.setColor(Color.WHITE);
+                g.drawString(scoreText, 10, getHeight() - 5);
             }// if statement
 
         }

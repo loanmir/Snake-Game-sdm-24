@@ -12,6 +12,6 @@ public class Main {
         //Cell[][] game = new Cell[][];
         SnakeMovement game = new SnakeMovement(board);
 
-        new GameWindow(game, board);
+        new GameWindow(game);
     }
 }
