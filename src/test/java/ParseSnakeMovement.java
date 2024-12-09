@@ -63,7 +63,7 @@ public class ParseSnakeMovement {
     void moveLeftNoEatingHeadUpdate() {
         Board board = new Board("");
         SnakeMovement snakeMovement = new SnakeMovement(board);
-        snakeMovement.setCurrentDirection(Direction.RIGHT);
+        snakeMovement.setCurrentDirection(Direction.UP);
         snakeMovement.moveSnake(Direction.LEFT);
         Snake snake = snakeMovement.getSnake();
         assertEquals(Cell.HEAD, board.getCell(5,4));
@@ -77,7 +77,7 @@ public class ParseSnakeMovement {
         board.setCell(5,6, Cell.BLANK);
         board.setCell(5,4, Cell.FOOD);
         SnakeMovement snakeMovement = new SnakeMovement(board);
-        snakeMovement.setCurrentDirection(Direction.RIGHT);
+        snakeMovement.setCurrentDirection(Direction.UP);
         snakeMovement.moveSnake(Direction.LEFT);
         Snake snake = snakeMovement.getSnake();
         assertEquals(Cell.BODY, board.getCell(5,5));

@@ -18,32 +18,36 @@ public class SnakeMovement {
         this.score = 0;
     }
 
-    public void moveSnake(Direction direction) {
+    public void moveSnake(Direction newDirection) {
         ArrayList<Coordinate> coordSnake = snake.getCoordSnake();  // get current snake coord
         Coordinate coordSnakeTail = coordSnake.get(coordSnake.size() - 1);  // get current tail coord
         Coordinate coordSnakeHeadBefore = coordSnake.get(0);  // get current head
 
-        // Calculate new head position
-        Coordinate coordSnakeHeadAfter = coordSnakeHeadBefore.plus(direction.vector);
+        if (newDirection.isOpposite(this.currentDirection)) {  // can't turn 180°
+            ;
+        } else {
+            // Calculate new head position
+            Coordinate coordSnakeHeadAfter = coordSnakeHeadBefore.plus(newDirection.vector);
 
-        // Determine if snake grows (eats food)
-        boolean grows = coordSnakeHeadAfter.equals(board.getCoordinateFood());
+            // Determine if snake grows (eats food)
+            boolean grows = coordSnakeHeadAfter.equals(board.getCoordinateFood());
 
-        // Update the board and snake coordinates
-        board.setCell(coordSnakeHeadBefore, Cell.BODY); // Current head becomes body
-        coordSnake.add(0, coordSnakeHeadAfter); // Add new head
+            // Update the board and snake coordinates
+            board.setCell(coordSnakeHeadBefore, Cell.BODY); // Current head becomes body
+            coordSnake.add(0, coordSnakeHeadAfter); // Add new head
 
-        if (!grows) {
-            // Remove tail if not growing
-            coordSnake.remove(coordSnake.size() - 1);
-            board.setCell(coordSnakeTail, Cell.BLANK); // Clear old tail
+            if (!grows) {
+                // Remove tail if not growing
+                coordSnake.remove(coordSnake.size() - 1);
+                board.setCell(coordSnakeTail, Cell.BLANK); // Clear old tail
+            }
+
+            // Update the new head on the board
+            board.setCell(coordSnakeHeadAfter, Cell.HEAD);
+
+            // Update snake coordinates
+            snake.setCoordSnake(coordSnake);
         }
-
-        // Update the new head on the board
-        board.setCell(coordSnakeHeadAfter, Cell.HEAD);
-
-        // Update snake coordinates
-        snake.setCoordSnake(coordSnake);
     }
 
 
@@ -208,7 +212,7 @@ public class SnakeMovement {
         this.snake = snake;
     }
 
-    public int getScore(){
+    public int getScore() {
         return this.score;
     }
 
