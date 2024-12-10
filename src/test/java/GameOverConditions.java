@@ -21,7 +21,7 @@ public class GameOverConditions {
     }
 
     @Test
-    @Disabled
+@Disabled
     void deathBySelfCollision(){
                    Board board = new Board("");
             board.setCell(4, 4, Cell.HEAD);  // head
@@ -30,8 +30,6 @@ public class GameOverConditions {
             board.setCell(5, 4, Cell.BODY);  // body
 
             SnakeMovement snakeMovement = new SnakeMovement(board);
-            //Snake snake = new Snake();
-
 
             snakeMovement.moveSnake(Direction.LEFT); // head on (4, 3)
             assertFalse(snakeMovement.isGameOver()); //ignore -- not valid movement

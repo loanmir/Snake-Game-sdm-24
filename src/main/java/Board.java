@@ -56,11 +56,14 @@ public class Board {
            }
 
     public void regenerateFood(){
+        // Get the current food position
+        Coordinate oldFoodPosition = getCoordinateFood();
         //Place the food in an empty random spot
         Random rng = new Random();
         int random_i_for_food = rng.nextInt((BOARD_SIZE - 2)) + 1;
         int random_j_for_food = rng.nextInt((BOARD_SIZE - 2)) + 1;
-        while (this.board[random_i_for_food][random_j_for_food] != Cell.BLANK) {
+        while (this.board[random_i_for_food][random_j_for_food] != Cell.BLANK ||
+                (random_i_for_food == oldFoodPosition.getY() && random_j_for_food == oldFoodPosition.getX()))  {
             random_i_for_food = rng.nextInt((BOARD_SIZE - 2)) + 1;
             random_j_for_food = rng.nextInt((BOARD_SIZE - 2)) + 1;
         }
