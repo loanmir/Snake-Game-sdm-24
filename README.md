@@ -1,13 +1,13 @@
 # Snake-Game-sdm-24
 Git repository for the final project assignment in Software Development Methods course
 
+# Thing to do
+- Method for taking user inputs
+- tests
+- thread for game main loop
+- modify Cell to remove head and body division
+- pseudocode for game loop
 
-# CLASS SNAKE
-- array list coordinate corpo e testa
-- snakeMovement obj per sapere dove andare
-
-- SnakeTests:
-- 
 
 
 # Movimento
@@ -15,9 +15,9 @@ Git repository for the final project assignment in Software Development Methods 
 - ogni frame c'è un check delle condizioni di morte e vittoria
 
 
-# Francesco -> SNAKE/MOVE SNAKE refactoring using only an array for body coords and considering the coord 0 as head
-# Lorenzo -> Have the move snake instantiate a snake obj and move it
-# Lucas -> Graphics and thread
+# Francesco -> tests for longer snake
+# Lorenzo -> pseudocode game loop and cell modifications
+# Lucas -> Graphics and thread (cantare!?!?)
 # Francesca -> testing things xD (fiocchetto?!?!)
 
 # Interesting concepts learnt from lecture
