@@ -125,12 +125,12 @@ public class GameWindow extends JFrame implements ActionListener{
                             case FOOD:
                                 g.setColor(Color.RED);
                                 break;
-                            case BODY:
+                            case SNAKE:
                                 g.setColor(Color.GREEN);
                                 break;
-                            case HEAD:
-                                g.setColor(new Color(0x006400));
-                                break;
+                            //case HEAD:
+                            //    g.setColor(new Color(0x006400));
+                            //    break;
                             default:
                                 throw new RuntimeException("Draw game error out of bounds");
                         }//switch

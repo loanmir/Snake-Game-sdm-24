@@ -1,10 +1,9 @@
 public enum Cell {
 
     BLANK(0),
-    BODY(1),
-    HEAD(2),
-    FOOD(3),
-    WALL(4);
+    SNAKE(1),
+    FOOD(2),
+    WALL(3);
 
     private final int value;
 

@@ -15,7 +15,7 @@ public class Coordinate {
         this.y = rowCol[0];
     }
 
-    public Coordinate(Coordinate coord){ //not used
+    public Coordinate(Coordinate coord) { //not used
         this.x = coord.getX();
         this.y = coord.getY();
     }
@@ -24,7 +24,7 @@ public class Coordinate {
     public static ArrayList<Coordinate> createCoordinateArray(int[][] rowColArray) {
         ArrayList<Coordinate> coordArray = new ArrayList<>();
         for (int[] value : rowColArray) {
-            if(value.length == 2) {
+            if (value.length == 2) {
                 Coordinate coord = new Coordinate(value[0], value[1]);
                 coordArray.add(coord);
             } else {
@@ -42,6 +42,10 @@ public class Coordinate {
     public int getY() {
         return this.y;
     }
+
+    public void setX(int x) { this.x = x; }
+
+    public void setY(int y) { this.y = y; }
 
     // Enabling the changing of position
     /*

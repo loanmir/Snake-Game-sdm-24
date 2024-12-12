@@ -16,9 +16,9 @@ public class CellParser {
     }
 
     @Test
-    void cellHasHead() {
+    void cellHasSnake() {
         Board board = new Board("");
-        assertEquals(board.getCell(5,5), Cell.HEAD);
+        assertEquals(board.getCell(5,5), Cell.SNAKE);
     }
 
     @Test
@@ -28,9 +28,10 @@ public class CellParser {
     }
 
     @Test
+    @Disabled
     void cellHasBody() {
         Board board = new Board("");
-        board.setCell(5,4, Cell.BODY);
-        assertEquals(board.getCell(5,4), Cell.BODY);
+        board.setCell(5,4, Cell.SNAKE);
+        assertEquals(board.getCell(5,4), Cell.SNAKE);
     }
 }

@@ -23,8 +23,8 @@ public class Board {
         }
 
         // Puts Head and Food at the center next to each other
-        this.board[5][5] = Cell.HEAD;
-        //this.board[5][6] = Cell.FOOD;
+        this.board[5][5] = Cell.SNAKE;
+        this.board[5][6] = Cell.FOOD;
     }
 
     /*public Board(Coordinate boardDim){
@@ -48,14 +48,14 @@ public class Board {
         Random rng = new Random();
         int colHead = rng.nextInt((BOARD_SIZE - 2)) + 1; //random number between 1 and 9, i.e. non-Wall cells
         int rowHead = rng.nextInt((BOARD_SIZE - 2)) + 1;
-        this.board[rowHead][colHead] = Cell.HEAD;
+        this.board[rowHead][colHead] = Cell.SNAKE;
 
         //Place the food in an empty random spot
         regenerateFood();
 
-           }
+    }
 
-    public void regenerateFood(){
+    public void regenerateFood() {
         // Get the current food position
         Coordinate oldFoodPosition = getCoordinateFood();
         //Place the food in an empty random spot
@@ -63,7 +63,7 @@ public class Board {
         int random_i_for_food = rng.nextInt((BOARD_SIZE - 2)) + 1;
         int random_j_for_food = rng.nextInt((BOARD_SIZE - 2)) + 1;
         while (this.board[random_i_for_food][random_j_for_food] != Cell.BLANK ||
-                (random_i_for_food == oldFoodPosition.getY() && random_j_for_food == oldFoodPosition.getX()))  {
+                (random_i_for_food == oldFoodPosition.getY() && random_j_for_food == oldFoodPosition.getX())) {
             random_i_for_food = rng.nextInt((BOARD_SIZE - 2)) + 1;
             random_j_for_food = rng.nextInt((BOARD_SIZE - 2)) + 1;
         }
@@ -100,26 +100,33 @@ public class Board {
         board[coord.getY()][coord.getX()] = cellContentToPut;
     }
 
-    public Coordinate getCoordinateHead() {
+    // Method used to locate the snake's head during SnakeMovement's construction.
+    public Coordinate getInitialCoordinateHead() {
+        Coordinate headCoor = new Coordinate(-1, -1); // if there is no snake, error case.
         for (int i = 0; i < Board.getBoardSize(); i++) {
             for (int j = 0; j < Board.getBoardSize(); j++) {
-                if (this.getCell(i, j) == Cell.HEAD) {
-                    return new Coordinate(i,j);
+                if (this.getCell(i, j) == Cell.SNAKE) {
+                    if ((headCoor.getX() == -1) && (headCoor.getY() == -1)) {
+                        headCoor.setX(i);
+                        headCoor.setY(j);
+                    } else {
+                        return new Coordinate(-1, -1);  // error case: snake is longer than 1
+                    }
                 }
             }
         }
-        return new Coordinate(-1,-1);  // error case
+        return headCoor; // if there is no snake, error case, otherwise, good case.
     }
 
     public Coordinate getCoordinateFood() {
         for (int i = 0; i < Board.getBoardSize(); i++) {
             for (int j = 0; j < Board.getBoardSize(); j++) {
                 if (this.getCell(i, j) == Cell.FOOD) {
-                    return new Coordinate(i,j);
+                    return new Coordinate(i, j);
                 }
             }
         }
-        return new Coordinate(-1,-1);  // error case
+        return new Coordinate(-1, -1);  // error case
     }
 
 }

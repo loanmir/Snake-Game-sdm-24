@@ -14,7 +14,7 @@ public class SnakeMovement {
         // This constructor instantiate a Snake object with only the head
         // If we need a snake with more than just the head we should modify it with snake.setCoordSnake(ArrayList<Coordinates>)
         this.board = board;
-        this.snake = new Snake(board.getCoordinateHead());
+        this.snake = new Snake(board.getInitialCoordinateHead());
         this.score = 0;
     }
 
@@ -34,7 +34,7 @@ public class SnakeMovement {
             boolean grows = coordSnakeHeadAfter.equals(board.getCoordinateFood());
 
             // Update the board and snake coordinates
-            board.setCell(coordSnakeHeadBefore, Cell.BODY); // Current head becomes body
+            board.setCell(coordSnakeHeadBefore, Cell.SNAKE); // Current head becomes body
             coordSnake.add(0, coordSnakeHeadAfter); // Add new head
 
             if (!grows) {
@@ -47,8 +47,8 @@ public class SnakeMovement {
             }
 
 
-            // Update the new head on the board
-            board.setCell(coordSnakeHeadAfter, Cell.HEAD);
+            // Update the new head on the board (if grows, it replaces the food)
+            board.setCell(coordSnakeHeadAfter, Cell.SNAKE);
 
             // Update snake coordinates
             snake.setCoordSnake(coordSnake);
@@ -86,12 +86,12 @@ public class SnakeMovement {
         //if head is in the food position
         if (head.equals(foodPosition)) {
             //increment the snake
-            ArrayList<Coordinate> body = snake.getCoordSnake();
-            Coordinate tail = body.get(body.size() - 1); //last cell of the body
+            //ArrayList<Coordinate> body = snake.getCoordSnake();
+            //Coordinate tail = body.get(body.size() - 1); //last cell of the body
 
 
-            body.add(new Coordinate(tail.getX(), tail.getY()));
-            snake.setCoordSnake(body);
+            //body.add(new Coordinate(tail.getX(), tail.getY()));
+            //snake.setCoordSnake(body);
 
             //new food
             board.regenerateFood();
