@@ -52,6 +52,9 @@ public class SnakeMovement {
 
             // Update snake coordinates
             snake.setCoordSnake(coordSnake);
+
+            // Update the current direction
+            this.currentDirection = newDirection;
         }
     }
 

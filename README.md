@@ -8,7 +8,26 @@ Git repository for the final project assignment in Software Development Methods 
 - modify Cell to remove head and body division
 - pseudocode for game loop
 
-
+# Pseudocode for gameplay loop
+```java
+public class Pseudocode {
+    public void thingToDoEachGameTick() {
+        Direction newDirection = keyEvent.vector; // o comunque prendo la direzione del keyEvent
+        snakeMovement.moveSnake(newDirection); // muovo il serpente
+        // il controllo che il serpente abbia mangiato è gestito da moveSnake direttamente, quindi non te ne devi preoccupare qui
+        // Controllo condizione di sconfitta
+        if (snakeMovement.isGameOver()) {
+            // Ferma tutto e mostra a schermo una finestra con scritto che hai perso :(
+        }
+        // Controllo condizione di vittoria, si potrebbe fare una cosa tipo
+        int max_length = (snakeMovement.getBoardState().getBoardSize - 2)*(snakeMovement.getBoardState().getBoardSize - 2);
+        if (snakeMovement.getSnake().getCoordSnake().size() >= max_length) {
+            // Ferma tutto e mostra a schermo una finestra con scritto che hai vinto :)
+        }
+        // Re-render del board
+    }
+}
+```
 
 # Movimento
 - Fare in modo che il movimento non avvenga quando si cerca di uscire dalla board
@@ -19,6 +38,8 @@ Git repository for the final project assignment in Software Development Methods 
 # Lorenzo -> pseudocode game loop and cell modifications
 # Lucas -> Graphics and thread (cantare!?!?)
 # Francesca -> testing things xD (fiocchetto?!?!)
+
+
 
 # Interesting concepts learnt from lecture
 -  Double tests used for fake tests 
