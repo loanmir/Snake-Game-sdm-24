@@ -6,6 +6,7 @@ import java.awt.event.*;
 
 public class GameWindow extends JFrame implements ActionListener{
     private final SnakeMovement snakeMovement;
+    private Direction keyEvent;
     //private final Board board;
     // Class extending JPanel for the game interface
     private final GamePanel gamePanel;
@@ -154,6 +155,7 @@ public class GameWindow extends JFrame implements ActionListener{
     class GamePlay extends Thread{
         private final JFrame frame;
 
+
         public GamePlay(JFrame frame){
             this.frame = frame;
         }
@@ -173,6 +175,27 @@ public class GameWindow extends JFrame implements ActionListener{
 
 
         }
+
+        class ArrowKeyListener extends KeyAdapter{
+            @Override
+            public void keyPressed(KeyEvent e){
+                int key = e.getKeyCode();
+                switch(key){
+                    case (KeyEvent.VK_LEFT):
+                        keyEvent = Direction.LEFT;
+                        break;
+                    case (KeyEvent.VK_RIGHT):
+                        keyEvent = Direction.RIGHT;
+                        break;
+                    case (KeyEvent.VK_UP):
+                        keyEvent = Direction.UP;
+                        break;
+                    case (KeyEvent.VK_DOWN):
+                        keyEvent = Direction.DOWN;
+                        break;
+                }
+            }
+        }//ArrowKeyListener
     }//GamePlay class
 
 
