@@ -24,7 +24,7 @@ public class Board {
 
         // Puts Head and Food at the center next to each other
         this.board[5][5] = Cell.HEAD;
-        this.board[5][6] = Cell.FOOD;
+        //this.board[5][6] = Cell.FOOD;
     }
 
     /*public Board(Coordinate boardDim){
@@ -91,7 +91,9 @@ public class Board {
     }
 
     public void setCell(int i, int j, Cell cellContentToPut) {
+
         board[i][j] = cellContentToPut;
+
     }
 
     public void setCell(Coordinate coord, Cell cellContentToPut) {

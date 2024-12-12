@@ -2,6 +2,7 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -124,13 +125,14 @@ public class ParseSnakeMovement {
         int initialSnakeSize = initialSnakeBody.size();
 
         // Move snake head to the food position
+        snakeMovement.getSnake().setCoordSnake(new ArrayList<>(Arrays.asList(initialFoodPosition)));
         snakeMovement.eatFood(initialFoodPosition);
 
         // Get the snake's body after eating
-        ArrayList<Coordinate> updatedSnakeBody = snakeMovement.getSnake().getCoordSnake();
+        int updatedSnakeBody = snakeMovement.getSnake().getCoordSnake().size();
 
         // Verify the snake has grown
-        assertEquals(initialSnakeSize + 1, updatedSnakeBody.size());
+        assertEquals(initialSnakeSize + 1, updatedSnakeBody);
 
     }
 }
