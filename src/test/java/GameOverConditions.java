@@ -14,7 +14,7 @@ public class GameOverConditions {
         //head of the snake up and left
         Board board = new Board("");
         board.setCell(5, 5, Cell.BLANK);
-        board.setCell(5, 1, Cell.SNAKE);
+        board.setCell(1, 5, Cell.SNAKE);
         SnakeMovement snakeMovement = new SnakeMovement(board);
 
         // moving the head up

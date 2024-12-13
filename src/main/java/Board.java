@@ -107,8 +107,8 @@ public class Board {
             for (int j = 0; j < Board.getBoardSize(); j++) {
                 if (this.getCell(i, j) == Cell.SNAKE) {
                     if ((headCoor.getX() == -1) && (headCoor.getY() == -1)) {
-                        headCoor.setX(i);
-                        headCoor.setY(j);
+                        headCoor.setY(i);
+                        headCoor.setX(j);
                     } else {
                         return new Coordinate(-1, -1);  // error case: snake is longer than 1
                     }
