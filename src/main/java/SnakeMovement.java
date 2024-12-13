@@ -51,6 +51,7 @@ public class SnakeMovement {
             } else {
                 // Consume food and regenerate new food
                 eatFood(coordSnakeHeadAfter);
+                score++;
             }
 
             // Update the new head on the board (if grows, it replaces the food)

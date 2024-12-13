@@ -49,3 +49,8 @@ public class Pseudocode {
   - Spies: implementation that just keeps some kinda of data/counter
   - Mocks: require a library, pre-program. obj. that focuses on the interaction between obj. and mock obj.
 
+**things to change in the interface:** 
+-the snake oppositeDirection -- it dies only when the snake size is > 2 
+-incremental speed -- the game starts slow and then goes faster
+-little bow on the snake with eyes
+-put an unsername to remember the previous scores 
