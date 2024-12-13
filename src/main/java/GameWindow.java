@@ -105,7 +105,7 @@ public class GameWindow extends JFrame implements ActionListener{
             //super.paintComponent(g);
             if(board != null){
 
-                int cellSize = 20;
+                int cellSize = 21;
 
 
                 for (int i = 0; i < board.length;i++){
@@ -125,7 +125,7 @@ public class GameWindow extends JFrame implements ActionListener{
                             case FOOD:
                                 g.setColor(Color.RED);
                                 break;
-                            case SNAKE:
+                            case SNAKE: //both body and head are green
                                 g.setColor(Color.GREEN);
                                 break;
                             //case HEAD:
