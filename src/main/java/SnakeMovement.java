@@ -44,6 +44,7 @@ public class SnakeMovement {
             } else {
                 // Consume food and regenerate new food
                 eatFood(coordSnakeHeadAfter);
+                score++;
             }
 
 
