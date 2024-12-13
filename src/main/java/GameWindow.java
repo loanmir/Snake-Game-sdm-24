@@ -105,7 +105,7 @@ public class GameWindow extends JFrame implements ActionListener{
             //super.paintComponent(g);
             if(board != null){
 
-                int cellSize = 21;
+                int cellSize = 20;
 
 
                 for (int i = 0; i < board.length;i++){
@@ -134,8 +134,6 @@ public class GameWindow extends JFrame implements ActionListener{
                             default:
                                 throw new RuntimeException("Draw game error out of bounds");
                         }//switch
-                        if (i==0 && j==0) {g.setColor(Color.YELLOW);}
-                        if (i==board.length - 1 && j==board.length - 1) {g.setColor(Color.MAGENTA);}
                         g.fillRect(x, y, cellSize, cellSize);
                         if(i != 0 && i != board.length - 1 && j != 0 && j != board[i].length - 1 ){
                             g.setColor(Color.LIGHT_GRAY);
@@ -162,19 +160,67 @@ public class GameWindow extends JFrame implements ActionListener{
 
         @Override
         public void run(){
+            // Removing the menu panel and adding the GamePanel to the window
             frame.remove(menuPanel);
             frame.add(gamePanel,BorderLayout.CENTER);
             frame.setFocusable(true);
-
+            frame.setFocusTraversalKeysEnabled(false);
+            frame.addKeyListener(new ArrowKeyListener()); // Adding KeyListener for arrow keys
             frame.setSize(616,639);
+            keyEvent = Direction.NULL;
 
             Cell[][] board = snakeMovement.getBoardState();
-            //gamePanel.setBoard(board);
+            gamePanel.setBoard(board);
 
-            frame.setVisible(true);
+            SwingUtilities.invokeLater(() -> {
+                frame.setVisible(true); // Making the frame visible
+                frame.requestFocusInWindow(); // Request focus
+            });
 
+            // Main game loop!
+            while(true){
+                try{
+                    int sleepTime = 100;
 
-        }
+                    Thread.sleep(sleepTime);
+                } catch(InterruptedException e){
+                    throw new RuntimeException(e);
+                } // catch
+                snakeMovement.setCurrentDirection(keyEvent);
+                Direction newDirection = keyEvent;
+                snakeMovement.moveSnake(keyEvent);
+                if(snakeMovement.isGameOver()){
+                    break;
+                }
+                board = snakeMovement.getBoardState();
+                gamePanel.setBoard(board);
+
+            } // end While
+
+            frame.remove(gamePanel);
+            JLabel finalOutput;
+            Cell[][] boardSize = snakeMovement.getBoardState();
+            int max_length = (boardSize.length - 2)*(boardSize.length - 2);
+            if(snakeMovement.isGameOver()){
+                finalOutput = new JLabel("Game Over!!!");
+            } else if (snakeMovement.getSnake().getCoordSnake().size() >= max_length){
+                finalOutput = new JLabel("You won!!");
+            } else{
+                finalOutput = new JLabel("Provaaaa");
+            }
+
+            finalPanel(finalOutput);
+        } // run method
+
+        public void finalPanel(JLabel label){
+            JPanel finalPanel = new JPanel();
+
+            finalPanel.add(label);
+            frame.add(finalPanel, BorderLayout.CENTER);
+
+            frame.revalidate();
+            frame.repaint();
+        } //finalPanel
 
         class ArrowKeyListener extends KeyAdapter{
             @Override
