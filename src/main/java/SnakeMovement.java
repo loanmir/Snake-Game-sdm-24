@@ -24,9 +24,16 @@ public class SnakeMovement {
         Coordinate coordSnakeTail = coordSnake.get(coordSnake.size() - 1);  // get current tail coord
         Coordinate coordSnakeHeadBefore = coordSnake.get(0);  // get current head
 
-        if (newDirection.isOpposite(this.currentDirection)) {  // can't turn 180°
-            ;
-        } else {
+        //System.out.println("Current dir: " + this.currentDirection);
+        //System.out.println("New dir: " + newDirection);
+
+        if (newDirection.isOpposite(this.currentDirection) && coordSnake.size() > 1) {  // can't turn 180°
+            newDirection = this.currentDirection;
+        }
+
+            // Update the current direction
+            this.currentDirection = newDirection;
+
             // Calculate new head position
             Coordinate coordSnakeHeadAfter = coordSnakeHeadBefore.plus(newDirection.vector);
 
@@ -46,41 +53,37 @@ public class SnakeMovement {
                 eatFood(coordSnakeHeadAfter);
             }
 
-
             // Update the new head on the board (if grows, it replaces the food)
             board.setCell(coordSnakeHeadAfter, Cell.SNAKE);
 
             // Update snake coordinates
             snake.setCoordSnake(coordSnake);
 
-            // Update the current direction
-            this.currentDirection = newDirection;
         }
+
+    public boolean isGameOver() {
+        ArrayList<Coordinate> coordSnake = snake.getCoordSnake();
+        Coordinate head = coordSnake.get(0);  // The head is at index 0 in the list
+        int headRow = head.getY();
+        int headCol = head.getX();
+
+        // Case 1: Check if the head is colliding with the wall
+        if (headRow <= 0 || headRow >= board.getBoardSize() - 1 || headCol <= 0 || headCol >= board.getBoardSize() - 1) {
+            return true;  // The game is over if the head goes out of bounds (hits the wall)
+        }
+
+        // second case : self collision
+        ArrayList<Coordinate> coordBody = new ArrayList<>(coordSnake.subList(1, coordSnake.size())); // body without head
+
+        System.out.println("head" + head + " body" + coordBody);
+
+        if (coordBody.contains(head)) {
+            System.out.println("Game Over: Head collided with body");
+            return true;
+        }
+
+        return false;
     }
-
-        public boolean isGameOver() {
-            ArrayList<Coordinate> coordSnake = snake.getCoordSnake();
-            Coordinate head = coordSnake.get(0);  // The head is at index 0 in the list
-            int headRow = head.getY();
-            int headCol = head.getX();
-
-            // Case 1: Check if the head is colliding with the wall
-            if (headRow <= 0 || headRow >= board.getBoardSize() - 1 || headCol <= 0 || headCol >= board.getBoardSize() - 1) {
-                return true;  // The game is over if the head goes out of bounds (hits the wall)
-            }
-
-            // second case : self collision
-            ArrayList<Coordinate> coordBody = new ArrayList<>(coordSnake.subList(1, coordSnake.size())); // body without head
-
-            System.out.println("head" + head + " body" + coordBody);
-
-            if (coordBody.contains(head)) {
-                System.out.println("Game Over: Head collided with body");
-                return true;
-            }
-
-            return false;
-        }
 
 
     public void eatFood(Coordinate foodPosition) {

@@ -180,13 +180,13 @@ public class GameWindow extends JFrame implements ActionListener{
             // Main game loop!
             while(true){
                 try{
-                    int sleepTime = 100;
+                    int sleepTime = 150;
 
                     Thread.sleep(sleepTime);
                 } catch(InterruptedException e){
                     throw new RuntimeException(e);
                 } // catch
-                snakeMovement.setCurrentDirection(keyEvent);
+                // snakeMovement.setCurrentDirection(keyEvent);  // this was the movement problem :^)
                 Direction newDirection = keyEvent;
                 snakeMovement.moveSnake(keyEvent);
                 if(snakeMovement.isGameOver()){
