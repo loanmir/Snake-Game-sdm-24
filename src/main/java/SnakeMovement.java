@@ -20,47 +20,52 @@ public class SnakeMovement {
 
     public void moveSnake(Direction newDirection) {
 
+        // Declaration of the variables used
         ArrayList<Coordinate> coordSnake = snake.getCoordSnake();  // get current snake coord
         Coordinate coordSnakeTail = coordSnake.get(coordSnake.size() - 1);  // get current tail coord
-        Coordinate coordSnakeHeadBefore = coordSnake.get(0);  // get current head
+        Coordinate coordSnakeHeadBefore = coordSnake.get(0);  // get current hea
 
-        //System.out.println("Current dir: " + this.currentDirection);
-        //System.out.println("New dir: " + newDirection);
+        // Check that newDirection is legal
+        newDirection = checkIfNewDirectionIsLegal(newDirection, coordSnake);
 
+        // Update the current direction with the newDirection
+        this.currentDirection = newDirection;
+
+        // Calculate head position after the move
+        Coordinate coordSnakeHeadAfter = coordSnakeHeadBefore.plus(newDirection.vector);
+
+        // Update the old head on the borad and add the new head to the snake ArrayList in position 0
+        board.setCell(coordSnakeHeadBefore, Cell.SNAKE); // Current head becomes body
+        coordSnake.add(0, coordSnakeHeadAfter); // Add new head
+
+        // Determine if snake head moved over a food Cell (if coordSnakeHeadAfter == coordFood)
+        boolean grows = coordSnakeHeadAfter.equals(board.getCoordinateFood());
+
+        if (!grows) {
+            // Remove tail from ArrayList and set it as BLANK
+            coordSnake.remove(coordSnake.size() - 1);
+            board.setCell(coordSnakeTail, Cell.BLANK); // Clear old tail
+        } else {
+            // Consume food and regenerate new food
+            eatFood(coordSnakeHeadAfter);
+            score++;
+        }
+
+        // Update the new head on the board (if grows, it replaces the food)
+        board.setCell(coordSnakeHeadAfter, Cell.SNAKE);
+
+        // Update snake Arraylist values
+        snake.setCoordSnake(coordSnake);
+
+    }
+
+    // Checks if the newDirection is legal based on the size of the snake (size=1 can go anywhere, size>1 cannot turn 180° in one command)
+    private Direction checkIfNewDirectionIsLegal(Direction newDirection, ArrayList<Coordinate> coordSnake) {
         if (newDirection.isOpposite(this.currentDirection) && coordSnake.size() > 1) {  // can't turn 180°
             newDirection = this.currentDirection;
         }
-
-            // Update the current direction
-            this.currentDirection = newDirection;
-
-            // Calculate new head position
-            Coordinate coordSnakeHeadAfter = coordSnakeHeadBefore.plus(newDirection.vector);
-
-            // Determine if snake grows (eats food)
-            boolean grows = coordSnakeHeadAfter.equals(board.getCoordinateFood());
-
-            // Update the board and snake coordinates
-            board.setCell(coordSnakeHeadBefore, Cell.SNAKE); // Current head becomes body
-            coordSnake.add(0, coordSnakeHeadAfter); // Add new head
-
-            if (!grows) {
-                // Remove tail if not growing
-                coordSnake.remove(coordSnake.size() - 1);
-                board.setCell(coordSnakeTail, Cell.BLANK); // Clear old tail
-            } else {
-                // Consume food and regenerate new food
-                eatFood(coordSnakeHeadAfter);
-                score++;
-            }
-
-            // Update the new head on the board (if grows, it replaces the food)
-            board.setCell(coordSnakeHeadAfter, Cell.SNAKE);
-
-            // Update snake coordinates
-            snake.setCoordSnake(coordSnake);
-
-        }
+        return newDirection;
+    }
 
     public boolean isGameOver() {
         ArrayList<Coordinate> coordSnake = snake.getCoordSnake();
