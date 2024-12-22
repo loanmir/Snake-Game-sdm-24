@@ -135,6 +135,10 @@ public class SnakeMovement {
         return this.score;
     }
 
+    public int getSpeed(){
+        return (int) (Math.log(score + 1) * 50);
+    }
+
 
 }
 

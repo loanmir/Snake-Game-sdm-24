@@ -1,4 +1,6 @@
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import javax.swing.plaf.basic.BasicButtonUI;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.*;
@@ -37,7 +39,7 @@ public class GameWindow extends JFrame implements ActionListener{
         JPanel menuPanel = new JPanel();
         // Setting grid layout of 4 rows and 1 column
         menuPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 50, 250));
-        menuPanel.setBackground(Color.RED); // Set background color
+        menuPanel.setBackground(Color.darkGray); // Set background color
         newGameButton = createStyledButton("New Game");
         newGameButton.addActionListener(this);
         exitGameButton = createStyledButton("Exit Game");
@@ -53,15 +55,45 @@ public class GameWindow extends JFrame implements ActionListener{
 
     private JButton createStyledButton(String text) {
         JButton button = new JButton(text);
-        button.setFont(new Font("Arial", Font.BOLD, 16)); // Set font
+        button.setFont(new Font("Calibri", Font.BOLD, 17)); // Set font
         button.setForeground(Color.WHITE); // Set text color
-        button.setBackground(Color.BLUE); // Set background color
+        button.setBackground(new Color(0x2dce98)); // Set background color
         button.setFocusPainted(false); // Remove focus border
         button.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20)); // Add padding
-        button.setPreferredSize(new Dimension(250, 75));
+        button.setPreferredSize(new Dimension(150, 45));
         button.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR)); // Change cursor on hover
+        button.setUI(new StyledButton());
         return button;
     }
+
+    class StyledButton extends BasicButtonUI{
+        @Override
+        public void installUI (JComponent c) {
+            super.installUI(c);
+            AbstractButton button = (AbstractButton) c;
+            button.setOpaque(false);
+            button.setBorder(new EmptyBorder(5, 15, 5, 15));
+
+        }
+
+        @Override
+        public void paint (Graphics g, JComponent c) {
+            AbstractButton b = (AbstractButton) c;
+            paintBackground(g, b, b.getModel().isPressed() ? 2 : 0);
+            super.paint(g, c);
+        }
+
+        private void paintBackground (Graphics g, JComponent c, int yOffset) {
+            Dimension size = c.getSize();
+            Graphics2D g2 = (Graphics2D) g;
+            g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+            g.setColor(c.getBackground().darker());
+            g.fillRoundRect(0, yOffset, size.width, size.height - yOffset, 10, 10);
+            g.setColor(c.getBackground());
+            g.fillRoundRect(0, yOffset, size.width, size.height + yOffset - 5, 10, 10);
+        }
+
+    }// StyledButton
 
     @Override
     public void actionPerformed(ActionEvent e){
@@ -118,27 +150,28 @@ public class GameWindow extends JFrame implements ActionListener{
                         switch(board[i][j]){
                             case BLANK:
                                 g.setColor(Color.WHITE);
+                                g.fillRect(x, y, cellSize, cellSize);
                                 break;
                             case WALL:
                                 g.setColor(Color.BLACK);
+                                g.fillRect(x, y, cellSize, cellSize);
                                 break;
                             case FOOD:
                                 g.setColor(Color.RED);
+                                g.fillOval(x, y, cellSize, cellSize);
                                 break;
                             case SNAKE: //both body and head are green
                                 g.setColor(Color.GREEN);
+                                g.fillOval(x, y, cellSize, cellSize);
                                 break;
-                            //case HEAD:
-                            //    g.setColor(new Color(0x006400));
-                            //    break;
                             default:
                                 throw new RuntimeException("Draw game error out of bounds");
                         }//switch
-                        g.fillRect(x, y, cellSize, cellSize);
-                        if(i != 0 && i != board.length - 1 && j != 0 && j != board[i].length - 1 ){
+                        g.fillOval(x, y, cellSize, cellSize);
+                        /*if(i != 0 && i != board.length - 1 && j != 0 && j != board[i].length - 1 ){
                             g.setColor(Color.LIGHT_GRAY);
                             g.drawRect(x, y, cellSize, cellSize);
-                        }
+                        }*/
                     }
                 }
                 String scoreText = "Score: " + snakeMovement.getScore();
@@ -180,7 +213,13 @@ public class GameWindow extends JFrame implements ActionListener{
             // Main game loop!
             while(true){
                 try{
-                    int sleepTime = 150;
+
+                    int speed = snakeMovement.getSpeed();
+                    int sleepTime = 300 - speed;
+
+                    if(sleepTime < 100){
+                        sleepTime = 100; // Minimum sleep -> Not quicker than this
+                    }
 
                     Thread.sleep(sleepTime);
                 } catch(InterruptedException e){
