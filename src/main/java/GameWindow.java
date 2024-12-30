@@ -4,6 +4,8 @@ import javax.swing.plaf.basic.BasicButtonUI;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.*;
+import java.io.File;
+import java.io.IOException;
 
 
 public class GameWindow extends JFrame implements ActionListener{
@@ -38,16 +40,39 @@ public class GameWindow extends JFrame implements ActionListener{
     public JPanel setMenu() {
         JPanel menuPanel = new JPanel();
         // Setting grid layout of 4 rows and 1 column
-        menuPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 50, 250));
+        menuPanel.setLayout(new BorderLayout());
         menuPanel.setBackground(Color.darkGray); // Set background color
+
+        // Adding the title
+        JLabel title = new JLabel("Snake", SwingConstants.CENTER);
+
+        title.setForeground(Color.RED);
+
+        try{
+            Font customFont = Font.createFont(Font.TRUETYPE_FONT, new File("D:\\Lucas\\UNITS_MAGISTRALE\\SOFTWARE_DEVELOPMENT_METHODS\\FINAL-PROJECT-SNAKE\\Snake-Game-sdm-24\\src\\main\\java\\VT323-Regular.ttf")).deriveFont(Font.BOLD, 145f);
+            title.setFont(customFont);
+        }catch(FontFormatException | IOException e){
+            title.setFont(new Font("Impact", Font.BOLD, 99));
+            System.err.println("Custom font not loaded: " + e.getMessage());
+        }//catch
+
+        menuPanel.add(title, BorderLayout.CENTER);
+
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 35, 130));
+        buttonPanel.setBackground(Color.darkGray);
+
         newGameButton = createStyledButton("New Game");
         newGameButton.addActionListener(this);
         exitGameButton = createStyledButton("Exit Game");
         exitGameButton.addActionListener(this);
 
         //Adding buttons to panel
-        menuPanel.add(newGameButton);
-        menuPanel.add(exitGameButton);
+        buttonPanel.add(newGameButton);
+        buttonPanel.add(exitGameButton);
+
+        menuPanel.add(buttonPanel, BorderLayout.SOUTH);
+
 
         return menuPanel;
     }
@@ -59,8 +84,8 @@ public class GameWindow extends JFrame implements ActionListener{
         button.setForeground(Color.WHITE); // Set text color
         button.setBackground(new Color(0x2dce98)); // Set background color
         button.setFocusPainted(false); // Remove focus border
-        button.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20)); // Add padding
-        button.setPreferredSize(new Dimension(150, 45));
+        //button.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20)); // Add padding
+        button.setPreferredSize(new Dimension(200, 70));
         button.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR)); // Change cursor on hover
         button.setUI(new StyledButton());
         return button;
@@ -88,9 +113,9 @@ public class GameWindow extends JFrame implements ActionListener{
             Graphics2D g2 = (Graphics2D) g;
             g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
             g.setColor(c.getBackground().darker());
-            g.fillRoundRect(0, yOffset, size.width, size.height - yOffset, 10, 10);
+            g.fillRoundRect(0, yOffset, size.width, size.height - yOffset, 20, 20);
             g.setColor(c.getBackground());
-            g.fillRoundRect(0, yOffset, size.width, size.height + yOffset - 5, 10, 10);
+            g.fillRoundRect(0, yOffset, size.width, size.height + yOffset - 10, 20, 20);
         }
 
     }// StyledButton
