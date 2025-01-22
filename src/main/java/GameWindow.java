@@ -50,7 +50,7 @@ public class GameWindow extends JFrame implements ActionListener{
         title.setForeground(Color.RED);
 
         try{
-            Font customFont = Font.createFont(Font.TRUETYPE_FONT, new File("D:\\Lucas\\UNITS_MAGISTRALE\\SOFTWARE_DEVELOPMENT_METHODS\\FINAL-PROJECT-SNAKE\\Snake-Game-sdm-24\\src\\main\\java\\VT323-Regular.ttf")).deriveFont(Font.BOLD, 145f);
+            Font customFont = Font.createFont(Font.TRUETYPE_FONT, new File("src/main/java/VT323-Regular.ttf")).deriveFont(Font.BOLD, 145f);
             title.setFont(customFont);
         }catch(FontFormatException | IOException e){
             title.setFont(new Font("Impact", Font.BOLD, 99));
@@ -254,7 +254,7 @@ public class GameWindow extends JFrame implements ActionListener{
             });
 
             try{
-                Font customFont = Font.createFont(Font.TRUETYPE_FONT, new File("D:\\Lucas\\UNITS_MAGISTRALE\\SOFTWARE_DEVELOPMENT_METHODS\\FINAL-PROJECT-SNAKE\\Snake-Game-sdm-24\\src\\main\\java\\VT323-Regular.ttf")).deriveFont(Font.BOLD, 145f);
+                Font customFont = Font.createFont(Font.TRUETYPE_FONT, new File("src/main/java/VT323-Regular.ttf")).deriveFont(Font.BOLD, 145f);
                 label.setFont(customFont);
             }catch(FontFormatException | IOException e){
                 label.setFont(new Font("Impact", Font.BOLD, 15));
