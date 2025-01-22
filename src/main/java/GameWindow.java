@@ -21,6 +21,7 @@ public class GameWindow extends JFrame implements ActionListener{
     // Buttons needed
     JButton newGameButton;
     JButton exitGameButton;
+    JButton returnToMenuButton;
 
     public GameWindow(SnakeMovement snakeMovement) {
         this.snakeMovement = snakeMovement;
@@ -77,48 +78,6 @@ public class GameWindow extends JFrame implements ActionListener{
         return menuPanel;
     }
 
-
-    private JButton createStyledButton(String text) {
-        JButton button = new JButton(text);
-        button.setFont(new Font("Calibri", Font.BOLD, 17)); // Set font
-        button.setForeground(Color.WHITE); // Set text color
-        button.setBackground(new Color(0x2dce98)); // Set background color
-        button.setFocusPainted(false); // Remove focus border
-        //button.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20)); // Add padding
-        button.setPreferredSize(new Dimension(200, 70));
-        button.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR)); // Change cursor on hover
-        button.setUI(new StyledButton());
-        return button;
-    }
-
-    class StyledButton extends BasicButtonUI{
-        @Override
-        public void installUI (JComponent c) {
-            super.installUI(c);
-            AbstractButton button = (AbstractButton) c;
-            button.setOpaque(false);
-            button.setBorder(new EmptyBorder(5, 15, 5, 15));
-
-        }
-
-        @Override
-        public void paint (Graphics g, JComponent c) {
-            AbstractButton b = (AbstractButton) c;
-            paintBackground(g, b, b.getModel().isPressed() ? 2 : 0);
-            super.paint(g, c);
-        }
-
-        private void paintBackground (Graphics g, JComponent c, int yOffset) {
-            Dimension size = c.getSize();
-            Graphics2D g2 = (Graphics2D) g;
-            g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-            g.setColor(c.getBackground().darker());
-            g.fillRoundRect(0, yOffset, size.width, size.height - yOffset, 20, 20);
-            g.setColor(c.getBackground());
-            g.fillRoundRect(0, yOffset, size.width, size.height + yOffset - 10, 20, 20);
-        }
-
-    }// StyledButton
 
     @Override
     public void actionPerformed(ActionEvent e){
@@ -266,22 +225,47 @@ public class GameWindow extends JFrame implements ActionListener{
             Cell[][] boardSize = snakeMovement.getBoardState();
             int max_length = (boardSize.length - 2)*(boardSize.length - 2);
             if(snakeMovement.isGameOver()){
-                finalOutput = new JLabel("Game Over!!!");
+                finalOutput = new JLabel("Game Over!", SwingConstants.CENTER);
             } else if (snakeMovement.getSnake().getCoordSnake().size() >= max_length){
-                finalOutput = new JLabel("You won!!");
+                finalOutput = new JLabel("You won!", SwingConstants.CENTER);
             } else{
-                finalOutput = new JLabel("Provaaaa");
+                finalOutput = new JLabel("Error");
             }
 
             finalPanel(finalOutput);
         } // run method
 
+        // FINAL PANEL
         public void finalPanel(JLabel label){
             JPanel finalPanel = new JPanel();
+            finalPanel.setLayout(new BorderLayout());
+            finalPanel.setBackground(Color.darkGray);
+            label.setForeground(Color.RED);
+            JPanel buttonPanel2 = new JPanel();
+            buttonPanel2.setLayout(new FlowLayout(FlowLayout.CENTER, 35, 130));
+            buttonPanel2.setBackground(Color.darkGray);
 
-            finalPanel.add(label);
-            frame.add(finalPanel, BorderLayout.CENTER);
+            returnToMenuButton = createStyledButton("BACK");
+            returnToMenuButton.addActionListener(e -> {
+                frame.dispose();
+                Board b = new Board();
+                SnakeMovement s = new SnakeMovement(b);
+                new GameWindow(s);
+            });
 
+            try{
+                Font customFont = Font.createFont(Font.TRUETYPE_FONT, new File("D:\\Lucas\\UNITS_MAGISTRALE\\SOFTWARE_DEVELOPMENT_METHODS\\FINAL-PROJECT-SNAKE\\Snake-Game-sdm-24\\src\\main\\java\\VT323-Regular.ttf")).deriveFont(Font.BOLD, 145f);
+                label.setFont(customFont);
+            }catch(FontFormatException | IOException e){
+                label.setFont(new Font("Impact", Font.BOLD, 15));
+                System.err.println("Custom font not loaded: " + e.getMessage());
+            }//catch
+
+            buttonPanel2.add(returnToMenuButton);
+            finalPanel.add(label, BorderLayout.CENTER);
+            finalPanel.add(buttonPanel2, BorderLayout.SOUTH);
+            frame.add(finalPanel);
+            frame.setSize(700, 700);
             frame.revalidate();
             frame.repaint();
         } //finalPanel
@@ -308,5 +292,48 @@ public class GameWindow extends JFrame implements ActionListener{
         }//ArrowKeyListener
     }//GamePlay class
 
+
+    private JButton createStyledButton(String text) {
+        JButton button = new JButton(text);
+        button.setFont(new Font("Calibri", Font.BOLD, 17)); // Set font
+        button.setForeground(Color.WHITE); // Set text color
+        button.setBackground(new Color(0x2dce98)); // Set background color
+        button.setFocusPainted(false); // Remove focus border
+        //button.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20)); // Add padding
+        button.setPreferredSize(new Dimension(200, 70));
+        button.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR)); // Change cursor on hover
+        button.setUI(new StyledButton());
+        return button;
+    }
+
+    // Styling the button with STYLED BUTTON class
+    class StyledButton extends BasicButtonUI{
+        @Override
+        public void installUI (JComponent c) {
+            super.installUI(c);
+            AbstractButton button = (AbstractButton) c;
+            button.setOpaque(false);
+            button.setBorder(new EmptyBorder(5, 15, 5, 15));
+
+        }
+
+        @Override
+        public void paint (Graphics g, JComponent c) {
+            AbstractButton b = (AbstractButton) c;
+            paintBackground(g, b, b.getModel().isPressed() ? 2 : 0);
+            super.paint(g, c);
+        }
+
+        private void paintBackground (Graphics g, JComponent c, int yOffset) {
+            Dimension size = c.getSize();
+            Graphics2D g2 = (Graphics2D) g;
+            g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+            g.setColor(c.getBackground().darker());
+            g.fillRoundRect(0, yOffset, size.width, size.height - yOffset, 20, 20);
+            g.setColor(c.getBackground());
+            g.fillRoundRect(0, yOffset, size.width, size.height + yOffset - 10, 20, 20);
+        }
+
+    }// StyledButton
 
 }// GameWindow class
