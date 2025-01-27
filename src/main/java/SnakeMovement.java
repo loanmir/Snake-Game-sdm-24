@@ -5,7 +5,6 @@ public class SnakeMovement {
     private final Board board;
     private Snake snake;
     private int score;
-    //private final Food food;
     private Direction currentDirection = Direction.NULL;
 
     // CoordBody[0] refers to the parte of the body closest to the head
@@ -97,14 +96,6 @@ public class SnakeMovement {
 
         //if head is in the food position
         if (head.equals(foodPosition)) {
-            //increment the snake
-            //ArrayList<Coordinate> body = snake.getCoordSnake();
-            //Coordinate tail = body.get(body.size() - 1); //last cell of the body
-
-
-            //body.add(new Coordinate(tail.getX(), tail.getY()));
-            //snake.setCoordSnake(body);
-
             //new food
             board.regenerateFood();
         }

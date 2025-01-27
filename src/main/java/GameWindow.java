@@ -11,7 +11,6 @@ import java.io.IOException;
 public class GameWindow extends JFrame implements ActionListener{
     private final SnakeMovement snakeMovement;
     private Direction keyEvent;
-    //private final Board board;
     // Class extending JPanel for the game interface
     private final GamePanel gamePanel;
 
@@ -84,7 +83,6 @@ public class GameWindow extends JFrame implements ActionListener{
         if(e.getSource() == newGameButton){
             GamePlay gameplay = new GamePlay(this);
             gameplay.start();
-            //System.out.println("new game!!!!");
         } else if(e.getSource() == exitGameButton){
             this.dispose();
         } else {
@@ -101,15 +99,7 @@ public class GameWindow extends JFrame implements ActionListener{
             this.snakeMovement = snakeMovement;
             Cell[][] board = snakeMovement.getBoardState();
             this.setBoard(board);
-            //this.board = board;
         }// constructor
-
-
-        /*public GamePanel(Cell[][] Board){
-            this.board = board;
-            Cell[][] board = snakeMovement.getBoardState();
-            this.setBoard(board);
-        }// constructor*/
 
         public void setBoard(Cell[][] board) {
             this.board = board;
@@ -118,16 +108,13 @@ public class GameWindow extends JFrame implements ActionListener{
 
         @Override
         protected void paintComponent(Graphics g){
-            //super.paintComponent(g);
             if(board != null){
 
                 int cellSize = 20;
 
 
                 for (int i = 0; i < board.length;i++){
-                    //System.out.println(board[i].getBoardSize());
                     for(int j = 0; j < board[i].length; j++){
-                        //System.out.println(board[i].length);
                         int x = j * cellSize; // Horizontal position of the cell
                         int y = i * cellSize; // Vertical position of the cell
 
@@ -152,10 +139,6 @@ public class GameWindow extends JFrame implements ActionListener{
                                 throw new RuntimeException("Draw game error out of bounds");
                         }//switch
                         g.fillOval(x, y, cellSize, cellSize);
-                        /*if(i != 0 && i != board.length - 1 && j != 0 && j != board[i].length - 1 ){
-                            g.setColor(Color.LIGHT_GRAY);
-                            g.drawRect(x, y, cellSize, cellSize);
-                        }*/
                     }
                 }
                 String scoreText = "Score: " + snakeMovement.getScore();
@@ -209,7 +192,6 @@ public class GameWindow extends JFrame implements ActionListener{
                 } catch(InterruptedException e){
                     throw new RuntimeException(e);
                 } // catch
-                // snakeMovement.setCurrentDirection(keyEvent);  // this was the movement problem :^)
                 Direction newDirection = keyEvent;
                 snakeMovement.moveSnake(keyEvent);
                 if(snakeMovement.isGameOver()){
@@ -299,7 +281,6 @@ public class GameWindow extends JFrame implements ActionListener{
         button.setForeground(Color.WHITE); // Set text color
         button.setBackground(new Color(0x2dce98)); // Set background color
         button.setFocusPainted(false); // Remove focus border
-        //button.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20)); // Add padding
         button.setPreferredSize(new Dimension(200, 70));
         button.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR)); // Change cursor on hover
         button.setUI(new StyledButton());

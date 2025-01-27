@@ -5,19 +5,11 @@ public class Snake {
     private ArrayList<Coordinate> coordSnake;
 
     //                                                                      //
-    //  CoordBody[0] refers to the parte of the body closest to the head    //
+    //  CoordBody[0] refers to the part of the body closest to the head    //
     //                                                                      //
 
     // length and head are deprecated, we can just use the array size for length and the position at index 0 for the head
     // We still keep the head in the Cell enum because we can use the board.getCoordinateHead()
-
-    /*public Snake(Coordinate initialPosition) {
-        this.head = initialPosition;
-        this.direction = Direction.NULL;
-        this.length = 1;
-        this.body = new ArrayList<Coordinate>();
-        this.body.add(initialPosition);
-    }*/
 
     public Snake(ArrayList<Coordinate> coordSnake) {
         this.coordSnake = coordSnake;

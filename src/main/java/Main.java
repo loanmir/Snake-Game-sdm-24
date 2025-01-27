@@ -6,7 +6,6 @@ public class Main {
 
     public static void main(String[] args){
         Board board = new Board();
-        //Cell[][] game = new Cell[][];
         SnakeMovement game = new SnakeMovement(board);
 
         new GameWindow(game);

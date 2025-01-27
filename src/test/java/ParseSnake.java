@@ -16,7 +16,6 @@ public class ParseSnake {
         snakeMovement.setCurrentDirection(Direction.RIGHT);
         ArrayList<Coordinate> coordBody = Coordinate.createCoordinateArray(tmp);
         snakeMovement.getSnake().setCoordSnake(coordBody);
-        //Snake snake = new Snake(coordBody);
         snakeMovement.moveSnake(Direction.RIGHT);
         ArrayList<Coordinate> newCoordBody = snakeMovement.getSnake().getCoordSnake();
         assertEquals(5, newCoordBody.size());
@@ -33,7 +32,6 @@ public class ParseSnake {
         ArrayList<Coordinate> coordBody = Coordinate.createCoordinateArray(tmp);
 
         snakeMovement.getSnake().setCoordSnake(coordBody);
-        //Snake snake = new Snake(coordBody);
         Coordinate coordTail = new Coordinate(tmp[3]);
 
         snakeMovement.moveSnake(Direction.RIGHT);
@@ -53,7 +51,6 @@ public class ParseSnake {
         ArrayList<Coordinate> coordBody = Coordinate.createCoordinateArray(body);
 
         snakeMovement.getSnake().setCoordSnake(coordBody);
-        //Snake snake = new Snake(coordBody);
         Coordinate coordTail = new Coordinate(body[3]);
 
         snakeMovement.moveSnake(Direction.RIGHT);

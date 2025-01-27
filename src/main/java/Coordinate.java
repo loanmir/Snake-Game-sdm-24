@@ -47,14 +47,6 @@ public class Coordinate {
 
     public void setY(int y) { this.y = y; }
 
-    // Enabling the changing of position
-    /*
-    public void plus(Coordinate coordinate) {
-        this.x += coordinate.getX();
-        this.y += coordinate.getY();
-    }
-    */
-
     // Changing of coordinates
     public Coordinate plus(Coordinate coordinate) {
         int tmpX = this.x + coordinate.getX();
