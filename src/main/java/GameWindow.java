@@ -192,7 +192,6 @@ public class GameWindow extends JFrame implements ActionListener{
                 } catch(InterruptedException e){
                     throw new RuntimeException(e);
                 } // catch
-                Direction newDirection = keyEvent;
                 snakeMovement.moveSnake(keyEvent);
                 if(snakeMovement.isGameOver()){
                     break;
