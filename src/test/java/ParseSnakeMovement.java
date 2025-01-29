@@ -113,27 +113,4 @@ public class ParseSnakeMovement {
         assertEquals(2, snake.getCoordSnake().size());
     }
 
-
-
-    @Test
-    @Disabled
-    void foodIsEaten(){
-        Board board = new Board();
-        SnakeMovement snakeMovement = new SnakeMovement(board);
-
-        Coordinate initialFoodPosition = board.getCoordinateFood(); // Initial food position
-        ArrayList<Coordinate> initialSnakeBody = new ArrayList<>(snakeMovement.getSnake().getCoordSnake()); // Snake's initial body
-        int initialSnakeSize = initialSnakeBody.size();
-
-        // Move snake head to the food position
-        snakeMovement.getSnake().setCoordSnake(new ArrayList<>(Arrays.asList(initialFoodPosition)));
-        snakeMovement.eatFood(initialFoodPosition);
-
-        // Get the snake's body after eating
-        int updatedSnakeBody = snakeMovement.getSnake().getCoordSnake().size();
-
-        // Verify the snake has grown
-        assertEquals(initialSnakeSize + 1, updatedSnakeBody);
-
-    }
 }
