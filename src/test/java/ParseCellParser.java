@@ -2,7 +2,7 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-public class CellParser {
+public class ParseCellParser {
     @Test
     void cellHasBlank() {
         Board board = new Board("");
