@@ -36,8 +36,8 @@ public class Pseudocode {
 
 # Francesco -> tests for longer snake
 # Lorenzo -> pseudocode game loop and cell modifications
-# Lucas -> Graphics and thread (cantare!?!?)
-# Francesca -> testing things xD (fiocchetto?!?!)
+# Lucas -> Graphics and thread 
+# Francesca -> testing things
 
 
 
